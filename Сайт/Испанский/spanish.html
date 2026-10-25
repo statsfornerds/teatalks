@@ -1,0 +1,2709 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="icon" type="image/svg+xml" href="../logo-tab.svg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tea - Курсы испанского языка онлайн: с нуля и для тех, кто давно в теме</title>
+    
+    <!-- Подключаем шрифт Poppins с поддержкой кириллицы -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap&subset=cyrillic,cyrillic-ext" rel="stylesheet">
+    
+    <style>
+        /* Базовые сбросы стилей */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Железный запрет на боковой скролл для всей страницы */
+        html, body {
+            overflow-x: hidden !important;
+            width: 100%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F4F5F7;
+            color: #1A2356; 
+            min-height: 100vh;
+            position: relative;
+            animation: pageFadeIn 0.25s ease-out forwards;
+            opacity: 0; /* Стартуем с полной прозрачности */
+        }
+
+         /* СОЧНАЯ CSS-АНИМАЦИЯ: Эффект проявления страницы (ИСПРАВЛЕНО: БЕЗ КОНФЛИКТА С ФИКСИРОВАННЫМИ ПЛАШКАМИ) */
+        @keyframes pageFadeIn {
+            from { opacity: 0; } 
+            to { opacity: 1; }
+        }
+
+        /* Мягкое левое размытое пятно */
+        .bg-decor-left {
+            position: absolute;
+            left: -150px;
+            top: -150px;
+            width: 400px;
+            height: 400px;
+            background: #fdf3ff;
+            filter: blur(100px);
+            border-radius: 50%;
+            z-index: -2;
+        }
+
+        /* Контейнер для центрирования контента */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ШАПКА САЙТА (Зафиксированная сверху плашка) */
+        .header {
+            position: fixed; 
+            top: 20px;       
+            left: 50%;       
+            transform: translateX(-50%); 
+            width: calc(100% - 40px); 
+            max-width: 1160px; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #ffffff;
+            padding: 12px 35px;
+            border-radius: 100px;
+            box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.05);
+            z-index: 100; 
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 68px; 
+            width: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #1A2356; 
+            font-size: 15px;
+            font-weight: 700; 
+            display: flex;
+            align-items: center;
+            gap: 10px; 
+            padding: 8px 18px; 
+            background: #ffffff; 
+            border-radius: 100px; 
+            border: 1px solid rgba(26, 35, 86, 0.04); 
+            transition: all 0.2s ease;
+        }
+
+        .nav-flag {
+            width: 24px; 
+            height: auto;
+            display: block;
+            border-radius: 4px; 
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); 
+        }
+
+        .nav-link:hover {
+            color: #ffffff; 
+            background: #1A2356; 
+            box-shadow: 0px 4px 15px rgba(26, 35, 86, 0.2); 
+            border-color: transparent;
+        }
+
+        .burger-menu {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 18px;
+            cursor: pointer;
+            z-index: 110;
+        }
+
+        .burger-menu span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: #1A2356;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .burger-menu.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .burger-menu.active span:nth-child(2) { opacity: 0; }
+        .burger-menu.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 10px); 
+            left: 0 !important;
+            right: 0 !important;
+            width: auto !important; 
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.08);
+            z-index: 99;
+            flex-direction: column;
+            gap: 12px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            pointer-events: none; 
+        }
+
+        .mobile-menu.open {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .mobile-menu .nav-link {
+            width: 100% !important;
+            max-width: 100% !important; 
+            box-sizing: border-box !important;
+            justify-content: flex-start;
+            background: #F4F5F7; 
+            border: none;
+            padding: 12px 20px;
+        }
+
+        .mobile-menu .btn-about {
+            display: block !important;
+            width: 100%;
+            text-align: center;
+            padding: 14px;
+            background: #1A2356;
+            color: #ffffff;
+            border-radius: 100px;
+            margin-top: 10px;
+        }
+
+        .btn-about {
+            border: none;
+            padding: 0;
+            background: transparent;
+            font-weight: 700;
+            font-size: 16px;
+            color: #1A2356;
+            cursor: pointer;
+        }
+
+        /* ГЛАВНЫЕ НАСТРОЙКИ СЛАЙДЕРА */
+        .slider-section {
+            position: relative;
+            width: 100%;
+            margin-top: 140px; 
+        }
+
+        .slider-window {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out; 
+            width: 100%;
+        }
+
+        .slide-item {
+            width: 100%;
+            flex-shrink: 0;
+            display: flex !important;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            padding: 20px 0 60px 0;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 45%; 
+            min-width: 320px; 
+            position: relative;
+            z-index: 5; 
+        }
+
+        .badge {
+            color: #FF7D44;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .hero-title {
+            font-size: 62px;
+            font-weight: 800;
+            line-height: 1.1;
+            color: #1A2356;
+            margin-bottom: 25px;
+            letter-spacing: -1px;
+        }
+
+        .hero-title span {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hero-title span::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 8px;
+            width: 100%;
+            height: 6px;
+            background-color: #ff7675; 
+            z-index: -1;
+            border-radius: 3px;
+        }
+
+        .hero-description {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #5E6282;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .cta-buttons {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .btn-primary {
+            background: #F4A804;
+            color: #ffffff;
+            border: none;
+            padding: 16px 35px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(244, 168, 4, 0.3);
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #e69500;
+            transform: translateY(-2px);
+        }
+
+        .btn-video {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: transparent;
+            border: none;
+            font-size: 16px;
+            font-weight: 500;
+            color: #5E6282;
+            cursor: pointer;
+            transition: transform 0.2s, color 0.2s;
+        }
+
+        .play-icon {
+            width: 45px;
+            height: 45px;
+            background: #ff7675;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(255, 118, 117, 0.3);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .play-icon::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-left: 10px solid #ffffff;
+            margin-left: 4px;
+        }
+
+        .btn-video:hover {
+            color: #1A2356; 
+            transform: translateY(-2px); 
+        }
+
+        .btn-video:hover .play-icon {
+            background-color: #ff5252; 
+            transform: scale(1.05); 
+        }
+
+        .hero-image-box {
+            flex: 0 0 500px; 
+            width: 500px;
+            display: flex;
+            justify-content: flex-start; 
+            align-items: flex-start;
+            z-index: 6;
+            position: relative;
+        }
+
+        .butterflies-gif {
+            position: absolute;
+            left: -40px; 
+            width: 210px; 
+            height: auto;
+            z-index: 2;   
+            transition: all 0.4s ease-in-out;
+        }
+
+        .main-img {
+            width: 100%;
+            max-width: 500px; 
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        /* ГАЛЕРЕЯ ВИДЕОРОЛИКОВ С ВЕДУЩИМИ */
+        .video-section {
+            padding: 60px 0;
+            width: 100%;
+        }
+
+        .video-section-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: #1A2356;
+            margin-bottom: 35px; 
+            letter-spacing: -0.5px;
+            text-align: center;  
+        }
+
+        .video-section-title span {
+            color: #FF7D44; 
+            position: relative;
+        }
+
+        .video-grid {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .video-card {
+            flex: 1;
+            min-width: 220px; 
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-preview-box {
+            position: relative;
+            width: 100%;
+            height: 380px; 
+            background-color: #000000;
+            border-radius: 16px;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .video-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .video-card:hover .video-thumb {
+            transform: scale(1.03); 
+        }
+
+        .video-player-overlay {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 10px;
+            pointer-events: none;
+        }
+
+        .video-progress-bar {
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .video-progress-line {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0%; 
+            background: #ffffff;
+            border-radius: 2px;
+            transition: width 0.1s linear;
+        }
+
+        .video-card-play-btn {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(5px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            pointer-events: none;
+        }
+
+        .video-card-play-btn::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-left: 10px solid #ffffff;
+            margin-left: 4px;
+        }
+
+        .video-preview-box:hover .video-card-play-btn {
+            background: rgba(255, 255, 255, 0.4);
+            transform: translate(-50%, -50%) scale(1.08);
+        }
+
+        .video-info {
+            padding: 15px 5px 5px 5px;
+        }
+
+        .video-author {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #1A2356;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .video-item-title {
+            font-size: 12px;
+            font-weight: 500;
+            color: #5E6282;
+        }
+
+        /* АДАПТИВ ПОД МОБИЛКИ (ЖЕСТКАЯ ЗАЧИСТКА БАГОВ) */
+        @media (max-width: 992px) {
+            .bg-decor-right-shape {
+                width: 100%;
+                height: 400px;
+                background-position: center top;
+            }
+
+            .header {
+                flex-direction: row !important; 
+                border-radius: 20px !important;
+                padding: 0 20px !important; 
+                gap: 15px;
+                top: 10px;
+                left: 10px !important; 
+                right: 10px !important;
+                width: auto !important; 
+                transform: none !important; 
+                height: 80px !important; 
+                align-items: center !important; 
+                display: flex !important;
+            }
+            
+            .nav, .header > .btn-about {
+                display: none !important;
+            }
+
+            .burger-menu {
+                display: flex !important;
+            }
+
+            .butterflies-gif,
+            img[alt="Китайский декор"],
+            img[src="butterflies.gif"],
+            img[src="lanterns.gif"] {
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+                width: 0 !important;
+                height: 0 !important;
+            }
+
+            .slide-item {
+                flex-direction: column-reverse !important;
+                text-align: center;
+                gap: 20px;
+                padding: 5px 0 0 0 !important; 
+                margin-bottom: -10px !important;
+            }
+
+            .hero-image-box {
+                justify-content: center !important;
+                width: 100% !important;
+                flex: none !important;
+                display: flex !important;
+            }
+
+            .main-img {
+                max-width: 260px !important;
+                width: 100% !important;
+                height: auto !important;
+            }
+
+            .hero-image-box img[alt="Таня"] {
+                width: 100% !important;
+                max-width: 260px !important;
+                height: auto !important;
+                display: block !important;
+                object-fit: contain !important;
+                border-radius: 40px !important;
+            }
+
+            .hero-content {
+                margin: 0 auto;
+                max-width: 100%;
+            }
+            .hero-title {
+                font-size: 32px !important;
+            }
+            .hero-description {
+                font-size: 13px !important;
+                margin-bottom: 20px !important;
+            }
+            .cta-buttons {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            /* ИСПРАВЛЕНО: Лечим иконку плеера на мобилках без наложения рамок на кнопку */
+            .btn-video .play-icon {
+                margin: 0 !important; /* Убираем десктопные смещения, которые давили на круг */
+                transform: translateY(0) !important; /* Центрируем пиксель в пиксель */
+                vertical-align: middle !important;
+            }
+
+            .t-btn-prev, .t-btn-next {
+                display: flex !important; 
+                width: 35px !important;
+                height: 35px !important;
+                font-size: 14px !important;
+                background: #ffffff !important; 
+                color: #1A2356 !important; 
+                border: 1px solid rgba(26, 35, 86, 0.15) !important; 
+                box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15) !important; 
+                top: 48% !important; 
+            }
+            .t-btn-prev { left: 10px !important; }
+            .t-btn-next { right: 10px !important; }
+
+            .teachers-slider-track {
+                gap: 20px;
+                width: 100% !important;
+            }
+            .teachers-card {
+                width: 100% !important;
+            }
+            .teachers-title {
+                font-size: 32px;
+                margin-bottom: 30px;
+            }
+            .teacher-img-box {
+                height: 280px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .video-section { padding: 30px 0 0 0 !important; }
+            .teachers-section { padding: 20px 0 0 0 !important; }
+            .activities-section { padding: 15px 0 30px 0 !important; }
+            .video-section-title, .teachers-title, .activities-title { margin-bottom: 20px !important; }
+        }
+
+        /* ==========================================================================
+           ИЗОЛИРОВАННЫЙ РАЗДЕЛ: ЯЗЫКОВЫЕ АКТИВНОСТИ (ИДЕАЛЬНЫЙ ДЕСКТОП)
+           ========================================================================== */
+        .activities-section {
+            padding: 80px 0;
+            width: 100%;
+            background-color: transparent;
+            display: block;
+        }
+
+        .activities-container {
+            display: flex;
+            flex-direction: row; 
+            justify-content: center; 
+            align-items: center;
+            gap: 80px; 
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .activities-left {
+            width: 420px;
+            flex-shrink: 0; 
+            text-align: left;
+        }
+
+        .activities-subtitle {
+            font-size: 14px;
+            font-weight: 700;
+            color: #5E6282;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .activities-title {
+            font-size: 44px;
+            font-weight: 800;
+            line-height: 1.2;
+            color: #1A2356;
+            margin-bottom: 40px;
+            letter-spacing: -0.5px;
+        }
+
+        .activity-item {
+            display: flex !important;
+            flex-direction: row !important; 
+            align-items: flex-start !important;
+            gap: 20px !important;
+            margin-bottom: 30px;
+            width: 100% !important;
+        }
+
+        .activity-icon {
+            width: 24px !important; 
+            height: auto !important;
+            flex-shrink: 0 !important; 
+            margin-top: 6px !important; 
+        }
+
+        .activity-text {
+            flex: 1 !important;
+            text-align: left !important;
+        }
+
+        .activity-text h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1A2356;
+            margin-bottom: 6px;
+        }
+
+        .activity-text p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #5E6282;
+            font-weight: 500;
+        }
+
+        .activities-right {
+            width: 650px !important; 
+            height: 500px !important; 
+            position: relative;
+            flex-shrink: 0;
+            margin-top: -100px; 
+            overflow: visible !important; 
+            display: block !important;
+        }
+
+        .activities-right::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 55%; 
+            transform: translate(-50%, -50%);
+            width: 360px; 
+            height: 360px;
+            background: rgba(224, 242, 254, 0.95);
+            filter: blur(50px);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .tag-word {
+            position: absolute;
+            font-weight: 700;
+            user-select: none;
+            transition: transform 0.3s ease;
+        }
+
+        .tag-word:hover { transform: scale(1.08); }
+        .tag-lang { color: #000000; font-size: 36px; }
+        .tag-purpose { color: #38bdf8; font-size: 26px; }
+
+        .t-culture    { top: 15%; left: 15%; }
+        .t-english    { top: 22%; left: 50%; }
+        .t-japanese   { top: 35%; left: 5%;  }
+        .t-connects   { top: 45%; left: 48%; }
+        .t-chinese    { top: 58%; left: 30%; }
+        .t-for-self   { top: 70%; left: 10%; }
+        .t-travel     { top: 68%; left: 64%; }
+        .t-spanish    { top: 85%; left: 12%; }
+        .t-italian    { top: 92%; left: 55%; }
+
+        @media (max-width: 992px) {
+            .activities-container { flex-direction: column !important; gap: 30px !important; }
+            .activities-left { width: 100% !important; }
+            .activities-title { font-size: 28px !important; }
+            .activities-right { display: none !important; }
+        }
+
+        /* ==========================================================================
+           НОВЫЙ РАЗДЕЛ: ОФИЦИАЛЬНЫЙ БЛОК ОСНОВАТЕЛЯ (НИКИТА ТАМБОВЦЕВ)
+           ========================================================================== */
+        .founder-section {
+            padding: 15px 0 60px 0;
+            width: 100%;
+            display: block;
+        }
+
+        .founder-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center; 
+            gap: 40px; 
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .founder-quote-card {
+            width: 640px; 
+            flex-shrink: 0; 
+            background: #ffffff;
+            border-radius: 32px; 
+            padding: 25px 45px 55px 45px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.03); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative; 
+        }
+
+        .founder-quote-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0px 25px 55px rgba(0, 0, 0, 0.06);
+        }
+
+        .founder-content-item {
+            display: none; 
+            width: 100%;
+        }
+
+        .founder-content-item.active {
+            display: block !important; 
+        }
+
+        .founder-quote-card p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #5E6282;
+            font-weight: 500;
+            margin-bottom: 12px; 
+            text-align: left;
+        }
+
+        .founder-quote-card p:last-child {
+            margin-bottom: 0;
+            color: #1A2356; 
+            font-weight: 700;
+            opacity: 0.8;
+            cursor: pointer;
+            transition: filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+            width: max-content;
+        }
+
+        .founder-quote-card:hover p:last-child,
+        .founder-quote-card p:last-child:hover {
+            opacity: 1;
+            transform: scale(1.02);
+        }
+
+        .achievements-main-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1A2356;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .achievements-list-new {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: left;
+        }
+
+        /* ИСПРАВЛЕНО: Текст на второй строчке теперь возвращается в самый левый край, под единицу */
+        .achievements-list-new li {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #5E6282;
+            font-weight: 500;
+            display: block !important; /* УБРАЛИ flex, вернули классический текстовый поток */
+            text-align: left !important;
+            margin-bottom: 10px;
+        }
+
+        /* Задаём красивый отступ для цифры, чтобы она стояла отдельно от текста */
+        .achievements-list-new li span {
+            color: #F4A804;
+            font-weight: 700;
+            display: inline-block;
+            margin-right: 6px; /* Фиксированный зазор между точкой и словом Выиграли */
+        }
+
+        /* КНОПКА ПЕРЕКЛЮЧЕНИЯ ВНУТРИ КАРТОЧКИ */
+        .founder-toggle-btn {
+            position: absolute;
+            right: 45px;
+            bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            background: #F4F5F7;
+            padding: 6px 14px;
+            border-radius: 100px;
+            z-index: 10;
+            user-select: none;
+            transition: all 0.2s ease;
+        }
+
+        .founder-toggle-btn:hover {
+            background: #1A2356;
+            color: #ffffff;
+            box-shadow: 0px 4px 10px rgba(26, 35, 86, 0.15);
+        }
+
+        .founder-btn-text {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: inherit;
+        }
+
+        .founder-btn-arrow {
+            font-size: 14px;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+            color: inherit;
+        }
+
+        .founder-toggle-btn.flipped .founder-btn-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* СПРАВА: ПЕРСОНАЛЬНАЯ КАРТОЧКА НИКИТЫ */
+        .founder-profile-card {
+            width: 320px;
+            background: #ffffff;
+            border-radius: 32px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.03);
+            flex-shrink: 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .founder-profile-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0px 25px 55px rgba(0, 0, 0, 0.06);
+        }
+
+        .founder-img-box {
+            width: 100%;
+            height: 280px; 
+            overflow: hidden;
+        }
+
+        .founder-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .founder-meta {
+            padding: 15px 30px;
+            text-align: left;
+        }
+
+        .founder-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1A2356;
+            margin-bottom: 6px;
+            letter-spacing: -0.3px;
+        }
+
+        .founder-status {
+            font-size: 14px;
+            font-weight: 500;
+            color: #5E6282;
+        }
+                  /* ==========================================================================
+           НОВЫЙ РАЗДЕЛ: ПРОМО-БЛОК СО СКИДКОЙ И ОБРАТНЫМ ОТСЧЕТОМ (ВЫРАВНИВАНИЕ)
+           ========================================================================== */
+        .promo-section {
+            padding: 60px 0;
+            width: 100%;
+            display: block;
+        }
+
+        .promo-bg-wrapper {
+            width: 100%;
+            max-width: 1140px;
+            margin: 0 auto;
+            border-radius: 40px; 
+            overflow: hidden;
+            position: relative;
+            background: url('promo-bg.jpg') no-repeat center center;
+            background-size: cover;
+            box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Мягкая вуаль на всю картинку */
+        .promo-bg-wrapper::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            /* Слева делаем плотный синий цвет под буквы, а направо он плавно растворяется в ноль, открывая графику */
+            background: rgba(26, 35, 86, 0.2); /* Легкая вуаль на 20%, остальное вытянут наши новые тени текста */
+            z-index: 1;
+        }
+
+
+        /* Главная флекс-сетка: жестко держит текст слева, а таймер справа */
+        .promo-glass-card {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding: 40px 60px; 
+            display: flex;
+            flex-direction: column !important; 
+            /* ИСПРАВЛЕНО: заменили space-between на flex-start, чтобы таймер не улетал вниз наружу из карточки */
+            justify-content: flex-start !important; 
+            align-items: flex-start !important; 
+            gap: 20px; /* Аккуратный плотный зазор между текстом, кнопкой и часами */
+            background: transparent !important;
+        }
+
+
+        /* ЛЕВАЯ СТОРОНА: ТЕКСТ И КНОПКА */
+        .promo-left {
+            width: 100% !important; /* Убираем 60%, даем тексту красиво расправиться */
+            max-width: 100% !important;
+            text-align: left;
+        }
+
+        .promo-title {
+            font-size: 38px; 
+            font-weight: 800;
+            line-height: 1.2;
+            color: #ffffff; 
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+            /* ИСПРАВЛЕНО: Плотная неоновая тень в цвет бренда, которая оторвет заголовок от самолетика */
+            text-shadow: 0px 4px 15px rgba(26, 35, 86, 0.95), 0px 2px 4px rgba(26, 35, 86, 0.95);
+        }
+
+        .promo-title span {
+            color: #FCD201 !important; 
+        }
+
+        .promo-description {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #ffffff !important; /* Сделали буквы чисто белыми для максимальной яркости */
+            font-weight: 500; /* Чуть-чуть уплотнили шрифт, чтобы он стал более читаемым */
+            margin-bottom: 25px;
+            /* ИСПРАВЛЕНО: Мягкая контрастная подложка под мелкий текст описания */
+            text-shadow: 0px 2px 10px rgba(26, 35, 86, 0.95), 0px 1px 3px rgba(26, 35, 86, 0.95);
+        }
+
+        .promo-btn {
+            display: inline-block;
+            background: #ffffff;
+            color: #1A2356;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 100px; 
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+        }
+
+        .promo-btn:hover {
+            background: #FCD201; 
+            color: #1A2356;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(252, 210, 1, 0.3);
+        }
+
+        /* СПРАВА: ЧИСТЫЙ АККУРАТНЫЙ ТАРИФНЫЙ ТАЙМЕР */
+        .promo-countdown {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-shrink: 0; 
+            background: rgba(26, 35, 86, 0.35) !important; 
+            padding: 20px 30px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative !important;
+            z-index: 5 !important; 
+            
+            /* ИСПРАВЛЕНО: Прижимаем таймер к левому краю строго под текст по одной линии */
+            align-self: flex-start !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+        }
+
+        .countdown-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 65px; 
+        }
+
+        /* ИСПРАВЛЕНО: Жёстко выкручиваем яркость цифр на 100% без блёклости */
+        .countdown-number {
+            font-size: 46px !important; 
+            font-weight: 800 !important;
+            color: #ffffff !important; /* Намертво заливаем чистым белым цветом */
+            opacity: 1 !important; /* Убираем любую блёклость и прозрачность */
+            line-height: 1 !important;
+            font-variant-numeric: tabular-nums !important; 
+            letter-spacing: -0.5px !important;
+            /* Добавляем объёмную тень, чтобы буквы сочно читались поверх самолётика */
+            text-shadow: 0px 2px 12px rgba(26, 35, 86, 0.4) !important; 
+            display: inline-block !important;
+        }
+
+        /* Делаем подписи под цифрами тоже яркими и читаемыми */
+        .countdown-label {
+            font-size: 11px !important;
+            font-weight: 600 !important;
+            text-transform: uppercase !important;
+            color: #ffffff !important; /* Чистый белый вместо блёклого серого */
+            opacity: 0.9 !important;
+            margin-top: 6px !important;
+            letter-spacing: 0.5px !important;
+        }
+
+        /* Делаем разделительные двоеточия чёткими */
+        .countdown-separator {
+            font-size: 32px !important;
+            font-weight: 700 !important;
+            color: #ffffff !important;
+            opacity: 0.5 !important;
+            line-height: 1 !important;
+            margin-top: -16px !important; 
+        }
+
+
+        /* АДАПТИВ ПОД МОБИЛКИ */
+        @media (max-width: 992px) {
+            .promo-section { padding: 30px 0 !important; }
+            .promo-bg-wrapper { border-radius: 24px; width: 100%; }
+            .promo-glass-card { flex-direction: column !important; padding: 40px 20px !important; gap: 30px !important; text-align: center !important; }
+            .promo-left { max-width: 100% !important; flex: none !important; text-align: center !important; }
+            .promo-title { font-size: 26px !important; }
+            .promo-description { font-size: 13px !important; margin-bottom: 20px !important; }
+            .promo-countdown { gap: 10px !important; padding: 15px 20px !important; width: 100%; justify-content: center; }
+            .countdown-number { font-size: 38px !important; }
+            .countdown-block { min-width: 55px; }
+            .countdown-separator { font-size: 26px !important; margin-top: -10px !important; }
+            /* ШАГ ПОБЕДИТЕЛЯ: Добавили адаптив блока Никиты Тамбовцева в мобилку */
+            .founder-section {
+                padding: 30px 0 !important; 
+            }
+            .founder-container {
+                flex-direction: column !important; /* На смартфонах карточка Никиты встанет под цитату */
+                gap: 25px !important;
+                align-items: center !important;
+                width: 100% !important;
+                padding: 0 10px !important; /* Безопасные отступы от краев экрана телефона */
+            }
+            .founder-quote-card {
+                width: 100% !important; /* Убираем десктопные 640px намертво! */
+                max-width: 100% !important;
+                box-sizing: border-box !important;
+                padding: 25px 20px 65px 20px !important; /* Даем воздуху тексту внутри */
+                min-height: auto !important;
+            }
+            .founder-quote-card p {
+                font-size: 14px !important; /* Чуть уменьшаем шрифт для мобильных экранов */
+                line-height: 1.6 !important;
+                margin-bottom: 10px !important;
+                text-align: left !important;
+                white-space: normal !important; /* Разрешаем тексту правильно переноситься */
+            }
+            .founder-quote-card p:last-child {
+                width: 100% !important;
+                white-space: normal !important; /* Защита секретной фразы от вылета за экран */
+            }
+            .founder-profile-card {
+                width: 100% !important; 
+                max-width: 340px !important; 
+            }
+            .founder-img-box {
+                height: 280px !important;
+            }
+
+            /* КНОПКА НА МОБИЛКЕ: убираем длинный текст, оставляем аккуратную стрелочку */
+            .founder-toggle-btn .founder-btn-text {
+                display: none !important; 
+            }
+            .founder-toggle-btn {
+                right: 20px !important;
+                bottom: 15px !important;
+                padding: 10px 14px !important; /* Круглая аккуратная форма под стрелочку */
+                background: #1A2356 !important; 
+                color: #ffffff !important;
+                border-radius: 100px !important;
+            }
+        }
+                /* ИСПРАВЛЕНО: Убрали чёрточки, сделали ссылку аккуратного голубого цвета */
+        .award-popup-link {
+            color: #2F80ED !important; /* Сочный, чистый интерактивный голубой цвет */
+            font-weight: 700;
+            text-decoration: none !important; /* Намертво убрали любые подчёркивания и чёрточки */
+            border-bottom: none !important; /* Гарантированно сносим пунктир */
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        /* Эффект при наведении мышки — цвет становится чуть глубже и благороднее */
+        .award-popup-link:hover {
+            color: #1B59B3 !important; 
+        }
+
+        /* Задний фон Pop-up (Затемнение сайта + блюр) */
+        .award-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 35, 86, 0.6); 
+            backdrop-filter: blur(8px); 
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .award-overlay.show {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        .award-popup-card {
+            background: #ffffff;
+            padding: 6px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            position: relative;
+            max-width: 90%;
+            width: 1200px; 
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .award-overlay.show .award-popup-card {
+            transform: scale(1); 
+        }
+
+        .award-popup-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 16px;
+            object-fit: contain;
+        }
+
+        .award-popup-close {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 36px;
+            height: 36px;
+            background: #ffffff;
+            color: #1A2356;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+            user-select: none;
+            z-index: 10;
+        }
+
+        .award-popup-close:hover {
+            background: #1A2356;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 580px) {
+            .award-popup-close {
+                top: 10px !important;
+                right: 10px !important;
+                background: rgba(255, 255, 255, 0.8) !important;
+            }
+        }
+/* ==========================================================================
+   НОВЫЙ РАЗДЕЛ: СТИЛЬНЫЙ ИНТЕРАКТИВНЫЙ FAQ (АККОРДЕОН)
+   ========================================================================== */
+
+.faq-section {
+    padding: 20px 0;
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
+.faq-subtitle {
+    font-size: 14px;
+    font-weight: 700;
+    color: #5E6282;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.faq-title {
+    font-size: 44px;
+    font-weight: 800;
+    color: #1A2356;
+    margin-bottom: 45px;
+    letter-spacing: -0.5px;
+}
+
+.faq-title span {
+    color: #FCD201; /* Твой фирменный золотой цвет */
+}
+
+/* Контейнер для вопросов */
+.faq-wrapper {
+    width: 100%;
+    max-width: 820px; /* Сделали блок компактным и аккуратным по ширине */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Зазор между плашками */
+}
+
+/* ОДИНОЧНАЯ ПЛАШКА ВОПРОСА */
+.faq-item {
+    background: #ffffff;
+    border-radius: 20px; /* Аккуратные скругления углов */
+    border: 1px solid rgba(26, 35, 86, 0.05);
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.02);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 15px 35px rgba(26, 35, 86, 0.04);
+    border-color: rgba(252, 210, 1, 0.3); /* Легкая золотая подсветка при наведении */
+}
+
+/* КЛИКАБЕЛЬНАЯ ШАПКА ВОПРОСА */
+.faq-trigger {
+    padding: 22px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    gap: 20px;
+}
+
+.faq-question {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1A2356;
+    text-align: left;
+    line-height: 1.4;
+}
+
+/* КРУГЛАЯ СТРЕЛОЧКА СПРАВА */
+.faq-icon-box {
+    width: 32px;
+    height: 32px;
+    background: #F4F5F7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1A2356;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover .faq-icon-box {
+    background: #1A2356;
+    color: #ffffff;
+}
+
+/* БЛОК С ОТВЕТОМ (Плавное раскрытие по высоте) */
+.faq-content {
+    max-height: 0; /* По умолчанию скрыт */
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1); /* Ультра-плавный выезд */
+}
+
+.faq-answer {
+    padding: 0 30px 25px 30px; /* Внутренние паддинги ответа */
+    font-size: 14px;
+    line-height: 1.7;
+    color: #5E6282;
+    font-weight: 500;
+    text-align: left;
+}
+
+/* СТИЛИ ДЛЯ АКТИВНОГО (РАСКРЫТОГО) СОСТОЯНИЯ */
+.faq-item.active {
+    border-color: rgba(252, 210, 1, 0.5);
+    box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.04);
+}
+
+.faq-item.active .faq-icon-box {
+    transform: rotate(180deg); /* Красиво переворачиваем стрелочку при раскрытии */
+    background: #FCD201;
+    color: #1A2356;
+}
+
+/* АДАПТИВ ПОД МОБИЛКИ */
+@media (max-width: 992px) {
+    .faq-section {
+        padding: 30px 0 !important;
+    }
+    .faq-title {
+        font-size: 32px !important;
+        margin-bottom: 30px !important;
+    }
+    .faq-wrapper {
+        padding: 0 10px !important;
+    }
+    .faq-trigger {
+        padding: 18px 20px !important;
+    }
+    .faq-question {
+        font-size: 14px !important;
+    }
+    .faq-answer {
+        padding: 0 20px 20px 20px !important;
+        font-size: 13px !important;
+    }
+}
+
+        /* ==========================================================================
+           НОВЫЙ РАЗДЕЛ: СТИЛЬНЫЙ И ДОРОГОЙ ТЕМНЫЙ ПОДВАЛ (ФУТЕР)
+           ========================================================================== */
+        .footer-section {
+            background: #1A2356 !important; /* Наш фирменный глубокий синий фон */
+            padding: 60px 0 50px 0 !important;
+            width: 100%;
+            display: block;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 60px !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 40px;
+            width: 100%;
+            max-width: 1140px;
+            margin: 0 auto;
+        }
+
+        /* ЛЕВАЯ КОЛОНКА (Документы) */
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            flex: 1;
+        }
+
+/* ЦЕНТРАЛЬНАЯ КОЛОНКА (ИСПРАВЛЕНО: ВЫРАВНЯЛИ ПО ЛИНЕЙКЕ) */
+        .footer-center {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            flex: 1;
+            padding-left: 20px;
+        }
+
+        /* Списки ссылок */
+        .footer-docs-list, .footer-pages-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px; 
+            margin-bottom: 30px;
+        }
+
+        .footer-docs-list a, .footer-pages-list a {
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7) !important; /* Мягкий белый цвет */
+            text-decoration: none;
+            transition: all 0.25s ease;
+            display: inline-block;
+        }
+
+        .footer-docs-list a:hover, .footer-pages-list a:hover {
+            color: #ffffff !important;
+            transform: translateX(4px);
+        }
+
+        .footer-requisites {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-requisites p {
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.4) !important;
+            line-height: 1.4;
+            letter-spacing: 0.3px;
+        }
+
+        /* СПРАВА: СОЦСЕТИ И ССЫЛКИ */
+        .footer-right {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important; 
+            gap: 16px !important;
+            min-width: 220px !important;
+            flex: 1;
+        }
+
+        .footer-social-row {
+            display: flex !important;
+            align-items: center !important;
+            gap: 14px !important;
+            text-decoration: none !important;
+            width: max-content !important;
+            transition: transform 0.2s ease !important;
+        }
+
+        /* Аккуратный круглый ободок под иконку на темном фоне */
+        .footer-icon-wrapper {
+            width: 40px !important;
+            height: 40px !important;
+            background: rgba(255, 255, 255, 0.08) !important; 
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border-radius: 50% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex-shrink: 0 !important;
+            transition: all 0.25s ease !important;
+        }
+
+        .footer-icon-vector {
+            width: 18px !important;
+            height: auto !important;
+            display: block !important;
+            filter: brightness(0) invert(1) !important; /* Принудительно делаем белыми на темном фоне */
+            opacity: 0.85 !important;
+            transition: all 0.25s ease !important;
+        }
+
+        .footer-social-text {
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            color: rgba(255, 255, 255, 0.85) !important; /* Яркий читаемый белый текст */
+            transition: color 0.25s ease !important;
+        }
+
+        /* ХОВЕР-ЭФФЕКТЫ ДЛЯ ТЕМНОГО НАБОРА */
+        .footer-social-row:hover {
+            transform: translateX(3px) !important;
+        }
+
+        .footer-social-row:hover .footer-icon-wrapper {
+            background: #FCD201 !important; /* Вспыхивает твоим фирменным золотом */
+            border-color: transparent !important;
+            box-shadow: 0px 4px 15px rgba(252, 210, 1, 0.3) !important;
+        }
+
+        .footer-social-row:hover .footer-icon-vector {
+            filter: brightness(0) !important; /* Картинка станет темной на золотом круге */
+            opacity: 1 !important;
+        }
+
+        .footer-social-row:hover .footer-social-text {
+            color: #FF7D44 !important; /* Текст плавно горит оранжевым */
+        }
+
+        /* АДАПТИВ ПОД МОБИЛКИ */
+        @media (max-width: 768px) {
+            .footer-section {
+                padding: 45px 20px 40px 20px !important;
+                margin-top: 40px !important;
+            }
+            .footer-container {
+                flex-direction: column !important; 
+                align-items: center !important;
+                text-align: center !important;
+                gap: 40px !important;
+            }
+            .footer-left,             /* ИСПРАВЛЕНО ДЛЯ МОБИЛОК: Выравниваем центральный контейнер строго по центру экрана */
+            .footer-center {
+                width: 100% !important;
+                padding-left: 0 !important; /* Убираем десктопный отступ слева, который сдвигал блок */
+                margin: 0 auto 15px auto !important; /* Центрируем сам блок и даем аккуратный зазор вниз */
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                text-align: center !important;
+            }
+
+                        .footer-right {
+                display: flex !important;
+                /* Переключаем в ровный горизонтальный ряд без переносов строк */
+                flex-direction: row !important;
+                flex-wrap: nowrap !important; 
+                justify-content: center !important;
+                align-items: center !important;
+                width: 100% !important;
+                max-width: 340px !important; 
+                margin: 0 auto !important;
+                margin-top: 10px !important; /* Даем аккуратный зазор сверху от блока языков */
+                gap: 12px !important; /* Идеальное расстояние между круглыми кнопками */
+                box-sizing: border-box !important;
+            }
+
+            /* Уменьшили отступ всей пачки соцсетей от предыдущих надписей выше */
+            .footer-docs-list, .footer-social-title, .footer-right > div:first-child {
+                width: 100% !important;
+                text-align: center !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                margin-bottom: 5px !important; 
+            }
+
+            /* ИСПРАВЛЕНО СЕНЬОРСКИ: Превращаем плашки в ровные одинаковые кругляши под иконки */
+            .footer-social-row {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                /* Задаем жесткий фиксированный размер сферы */
+                flex: 0 0 46px !important; 
+                max-width: 46px !important;
+                height: 46px !important;
+                margin: 0 !important;
+                padding: 0 !important; /* Убираем паддинги, центрируя только значок */
+                gap: 0 !important; 
+                border-radius: 50% !important; /* Скругляем плашки в круги */
+                box-sizing: border-box !important;
+            }
+
+            /* ИСПРАВЛЕНО: Намертво прячем названия соцсетей, оставляя только значки */
+            .footer-social-row span,
+            .footer-social-row p {
+                display: none !important;
+            }
+
+            /* Идеально ровняем саму иконку по центру сферы */
+            .footer-social-row i,
+            .footer-social-row img {
+                margin: 0 !important;
+                font-size: 18px !important;
+                display: block !important;
+            }
+
+            /* МАГИЯ СЕТКИ ДЛЯ ЯЗЫКОВ: Выстраиваем направления в аккуратный ряд по 2 штуки */
+            .footer-pages-list {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important; 
+                gap: 12px 20px !important; 
+                width: 100% !important;
+                max-width: 280px !important; 
+                margin: 0 auto !important; 
+                padding: 0 !important;
+                list-style: none !important;
+            }
+
+            .footer-pages-list li {
+                text-align: center !important;
+                width: 100% !important;
+            }
+
+            /* Насильно даем отступ снизу последней ссылке, чтобы отодвинуть ИП */
+            .footer-docs-list li:last-child a,
+            .footer-left + .footer-center, 
+            a[href*="rules"] {
+                margin-bottom: 25px !important; 
+                display: inline-block !important; 
+            }
+        }
+             /* ==========================================================================
+           НОВЫЙ РАЗДЕЛ: КАЛЕНДАРЬ ОПАДАЮЩЕЙ САКУРЫ И КРЕАТИВНЫЕ БЛОКИ
+           ========================================================================== */
+        .tree-section {
+            padding: 60px 0;
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+
+        .tree-section-title {
+            font-size: 44px;
+            font-weight: 800;
+            color: #1A2356;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+
+        .tree-section-title span {
+            color: #FF7D44; /* Наш фирменный оранжевый акцент */
+        }
+
+        .tree-section-subtitle {
+            font-size: 16px;
+            color: #5E6282;
+            max-width: 600px;
+            margin: 0 auto 45px auto;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        /* Сетка: Дерево слева, табличка справа */
+        .tree-grid {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: stretch;
+            gap: 40px;
+            width: 100%;
+        }
+
+/* Контейнер холста дерева (ИСПРАВЛЕНО: ДИНАМИЧЕСКИЙ КАРТИНОЧНЫЙ ФОН) */
+        .tree-container {
+            flex: 1;
+            
+            /* ИСПРАВЛЕНО: Вместо #ffffff ставим твою картинку. 
+               Замени 'sakura-bg.png' на реальное имя твоего файла в папке! */
+            background: url('sakura-bg.png') no-repeat center center !important;
+            background-size: cover !important; /* Жестко: картинка идеально заполнит весь блок без искажений */
+            
+            border-radius: 28px;
+            height: 400px;
+            position: relative;
+            box-shadow: 0px 15px 45px rgba(26, 35, 86, 0.03);
+            border: 1px solid rgba(26, 35, 86, 0.02);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tree-base-img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            z-index: 2;
+        }
+
+/* Интерактивный векторный лепесток сакуры (ИСПРАВЛЕНО: УСКОРЕНО МЕРЦАНИЕ) */
+        .tree-leaf-vector {
+            position: absolute;
+            width: 14px;
+            height: 8px;
+            background: #FFB7C5 !important; 
+            border-radius: 50% 0 50% 0;
+            z-index: 3;
+            transform: translateX(-460%) rotate(-15deg);
+            transition: all 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+            box-shadow: 0 0 6px #FFB7C5, 0 0 12px rgba(255, 183, 197, 0.6), inset 0 0 4px #ffffff;
+            animation: sakuraGlow 2s ease-in-out infinite alternate;
+        }
+
+        /* Состояние опавшего лепестка на земле */
+        .tree-leaf-vector.fallen {
+            transform: rotate(45deg) !important;
+            background: #D98293 !important; /* Умеренно приглушенный, не темный оттенок для земли */
+            box-shadow: 0 2px 5px rgba(217, 130, 147, 0.3) !important;
+            animation: none !important;
+        }
+
+        /* СОЧНАЯ CSS-АНИМАЦИЯ: Сбалансированное и чистое мерцание */
+        @keyframes sakuraGlow {
+            0% {
+                box-shadow: 0 0 5px #FFB7C5, 0 0 10px rgba(255, 183, 197, 0.4), inset 0 0 2px #ffffff;
+                filter: brightness(0.95); /* Чуть-чуть уводим вглубь в спокойном состоянии */
+            }
+            100% {
+                box-shadow: 0 0 10px #FFB7C5, 0 0 18px rgba(255, 183, 197, 0.8), inset 0 0 5px #ffffff;
+                filter: brightness(1.05); /* Легкий аккуратный блик на пике, без выжигания белизной */
+            }
+        }
+
+        /* ТАБЛИЧКА СТАТУСА РЯДОМ С ДЕРЕВОМ */
+        .tree-info-panel {
+            flex: 0 0 380px;
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 35px 30px;
+            box-shadow: 0px 15px 45px rgba(26, 35, 86, 0.03);
+            border: 1px solid rgba(26, 35, 86, 0.02);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .panel-heading {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1A2356;
+            margin-bottom: 20px;
+        }
+
+        .panel-stat {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .panel-stat-num {
+            font-size: 56px;
+            font-weight: 800;
+            color: #1A2356;
+            line-height: 1;
+        }
+
+        .panel-stat-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #5E6282;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .panel-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #5E6282;
+            font-weight: 500;
+        }
+
+        .panel-timer-line {
+            font-size: 14px;
+            font-weight: 700;
+            color: #FF7D44;
+            margin-top: 15px;
+            border-top: 1px solid rgba(26, 35, 86, 0.08);
+            padding-top: 15px;
+        }
+
+        /* СТИЛИ: ПРОГРАММА ОБУЧЕНИЯ */
+        .program-section {
+            padding: 60px 0;
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+
+        .program-title {
+            font-size: 44px;
+            font-weight: 800;
+            color: #1A2356;
+            margin-bottom: 45px;
+            letter-spacing: -0.5px;
+        }
+
+        .program-title span {
+            color: #FCD201;
+        }
+
+        .program-grid {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            width: 100%;
+        }
+
+        .program-card {
+            flex: 1;
+            background: #ffffff;
+            padding: 35px 30px;
+            border-radius: 24px;
+            box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.02);
+            text-align: left;
+            border: 1px solid rgba(26, 35, 86, 0.02);
+            transition: transform 0.3s ease;
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .program-num {
+            font-size: 36px;
+            font-weight: 800;
+            color: #FF7D44;
+            margin-bottom: 15px;
+            line-height: 1;
+        }
+
+        .program-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1A2356;
+            margin-bottom: 12px;
+        }
+
+        .program-card p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #5E6282;
+            font-weight: 500;
+        }
+
+        /* СТИЛИ: ВАЙБОВЫЕ ОТЗЫВЫ */
+        .reviews-section {
+            padding: 60px 0;
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+
+        .reviews-title {
+            font-size: 44px;
+            font-weight: 800;
+            color: #1A2356;
+            margin-bottom: 45px;
+            letter-spacing: -0.5px;
+        }
+
+        .reviews-title span {
+            color: #FF7D44;
+        }
+
+        .reviews-grid {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            width: 100%;
+        }
+
+        .review-bubble {
+            flex: 1;
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 24px;
+            box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.02);
+            text-align: left;
+            position: relative;
+            border: 1px solid rgba(26, 35, 86, 0.02);
+        }
+
+        .review-avatar {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .review-text {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #5E6282;
+            font-weight: 500;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .review-author {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1A2356;
+        }
+
+                @media (max-width: 1024px) {
+            /* 1. ГЛОБАЛЬНЫЕ НАСТРОЙКИ СЕКЦИЙ И СЕТОК */
+            .tree-section, .program-section, .reviews-section { 
+                padding: 40px 15px !important; 
+            }
+            .tree-section-title, .program-title, .reviews-title { 
+                font-size: 28px !important; 
+                margin-bottom: 20px !important; 
+            }
+            .tree-grid, .program-grid, .reviews-grid { 
+                flex-direction: column !important; 
+                gap: 25px !important; 
+                width: 100% !important;
+            }
+
+            /* 2. ИСПРАВЛЕНО ДЛЯ МОБИЛОК: Сакура расправляется во весь рост без сплющивания */
+            .tree-container { 
+                width: 100% !important; 
+                max-width: 100% !important; 
+                margin: 0 auto !important; 
+                overflow: hidden !important; 
+                position: relative !important;
+
+                /* ИСПРАВЛЕНО: Убрали фиксированную высоту и задали идеальные пропорции 16:9. 
+                   Теперь на мобилках блок станет высоким, и весь твой пейзаж раскроется во всей красе! */
+                height: auto !important;
+                aspect-ratio: 16 / 9 !important;
+                background-size: cover !important;
+            }
+
+            /* 3. ИСПРАВЛЕНО ДЛЯ МОБИЛОК: Табличка больше НЕ наползает на дерево, а падает строго вниз */
+            .tree-info-panel { 
+                flex: 1 1 auto !important; 
+                width: 100% !important; 
+                max-width: 100% !important; 
+                box-sizing: border-box !important;
+                padding: 30px 25px !important; 
+            }
+            .panel-stat-num { 
+                font-size: 44px !important; 
+            }
+
+            /* 4. ИСПРАВЛЕНО ДЛЯ МОБИЛОК: Центрируем иконку плеера и возвращаем ей круглую форму */
+            .tree-leaf-vector {
+                /* Если на мобилке они улетали сильнее влево — уменьши этот процент (например, до -1% или 0%).
+                   Если улетали вправо — сделай его побольше (например, -7%). Поставь сейчас -2% для баланса */
+                transform: translateX(-250%) rotate(-15deg) !important;
+            }
+            .btn-video {
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                overflow: visible !important;
+            }
+            .btn-video .play-icon {
+                margin: 0 8px 0 0 !important;
+                flex-shrink: 0 !important;
+                background-size: contain !important;
+                transform: translateY(0px) !important;
+            }
+
+            /* 5. ИСПРАВЛЕНО ДЛЯ МОБИЛОК: Убираем жесткую обрезку слайдера, чтобы кнопка не резалась полом */
+            .slider-section, .slide-item, .hero-content {
+                height: auto !important; 
+                overflow: visible !important; 
+                padding-bottom: 20px !important; 
+            }
+        }
+
+
+           </style>
+</head>
+<body>
+
+    <div class="bg-decor-left"></div>
+    <div class="bg-decor-right-shape"></div>
+
+    <div class="container">
+        <!-- Шапка (Навигация) -->
+        <header class="header">
+            <a href="../index.html" class="logo">
+                <img src="logo.svg" alt="Tea" class="logo-img" onerror="this.onerror=null; this.src='logo.png';">
+            </a>
+
+            
+            <nav class="nav">
+                <a href="../Английский/english.html" class="nav-link" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
+    <img src="gb.svg" alt="Англия" class="nav-flag-icon" style="width: 18px; height: auto; display: block;">
+    Английский
+</a>
+                <a href="../Китайский/chinese.html" class="nav-link" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
+    <img src="cn.svg" alt="Китай" class="nav-flag-icon" style="width: 18px; height: auto; display: block;">
+    Китайский
+</a>
+                <a href="../Японский/japanese.html" class="nav-link" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
+                    <img src="../Японский/jp.svg" alt="Япония" class="nav-flag-icon" style="width: 18px; height: auto; display: block;">
+                    Японский
+                </a>
+                <a href="../Испанский/spanish.html" class="nav-link" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
+                    <img src="../Испанский/es.svg" alt="Испания" class="nav-flag-icon" style="width: 18px; height: auto; display: block;">
+                    Испанский
+                </a> 
+                <a href="../Один на один/one-on-one.html" class="nav-link" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
+    Один на один
+</a>
+            </nav>
+
+            <div class="burger-menu" id="burgerBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="../Английский/english.html" class="nav-link" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
+    <img src="gb.svg" alt="Англия" class="nav-flag-icon" style="width: 18px; height: auto; display: block;">
+    Английский
+</a>
+                <a href="../Китайский/chinese.html" class="nav-link" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
+    <img src="cn.svg" alt="Китай" class="nav-flag-icon" style="width: 18px; height: auto; display: block;">
+    Китайский
+</a>
+                <a href="../Японский/japanese.html" class="nav-link" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
+    <img src="jp.svg" alt="Япония" class="nav-flag-icon" style="width: 24px; height: auto; display: block;">
+    Японский
+</a>
+                <a href="../Испанский/spanish.html" class="nav-link" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
+    <img src="es.svg" alt="Испания" class="nav-flag-icon" style="width: 24px; height: auto; display: block;">
+    Испанский
+</a>
+                <a href="../Один на один/one-on-one.html" class="nav-link" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
+    Один на один
+</a>
+                                <!-- Мобильная синяя кнопка внутри выпадающего меню mobile-menu -->
+                <a href="../index.html?go=about" class="btn-about" style="text-decoration: none; display: block; text-align: center; padding: 14px; background: #1A2356; color: #ffffff; border-radius: 100px; margin-top: 10px; cursor: pointer !important;">о нас</a>
+
+            </div>
+
+            <!-- Десктопная текстовая кнопка на ПК-версии -->
+            <a href="../index.html?go=about" class="btn-about" style="text-decoration: none; display: flex; align-items: center; cursor: pointer !important;">о нас</a>
+
+        </header>
+
+    <!-- ==========================================================================
+         ИСПРАВЛЕННЫЙ БЛОК-ЗАГЛУШКА (ЗЕЛЕНЫЙ СТИЛЬ + ОТСТУПЫ + МОБИЛЬНЫЙ АДАПТИВ)
+         ========================================================================== -->
+    <main class="spanish-coming-soon" style="flex: 1 0 auto !important; padding: 140px 0 100px 0; display: flex; align-items: center; justify-content: center; box-sizing: border-box;">
+        <div style="width: 100%; max-width: 1140px; margin: 0 auto; padding: 0 20px; box-sizing: border-box;">
+            
+            <div class="coming-soon-card" style="background: #ffffff; border-radius: 32px; padding: 60px 80px; box-shadow: 0px 20px 50px rgba(26, 35, 86, 0.03); border: 1px solid rgba(26, 35, 86, 0.02); text-align: center; max-width: 600px; margin: 0 auto; width: 100%; box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif;">
+                
+                <!-- ИСПРАВЛЕНО: Свежий зеленый неоновый индикатор "COMING SOON" -->
+                <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.08); color: #10B981; padding: 8px 18px; border-radius: 100px; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 25px;">
+                    <!-- Пульсирующая зеленая неоновая точка -->
+                    <span style="width: 8px; height: 8px; background-color: #10B981; border-radius: 50%; display: inline-block; box-shadow: 0 0 10px #10B981;"></span>
+                    Coming Soon
+                </div>
+                
+                <!-- Испанский заголовок -->
+                <h1 class="coming-soon-title" style="font-size: 42px; font-weight: 800; color: #1A2356; margin-top: 0; margin-bottom: 20px; letter-spacing: -0.5px; line-height: 1.2;">¡Hola!<br>Испанский в разработке</h1>
+                
+                <!-- Текст -->
+                <p style="font-size: 16px; line-height: 1.7; color: #5E6282; font-weight: 500; margin-bottom: 35px; text-align: center;">Мы вовсю готовим огненный языковой поток в нашем фирменном формате Edutainment. Пылкая культура, сочный визуал и полное погружение уже совсем близко!</p>
+                
+                <!-- Кнопка возврата -->
+                <a href="../index.html" style="display: inline-flex; align-items: center; justify-content: center; background: #1A2356; color: #ffffff; font-size: 15px; font-weight: 600; padding: 16px 32px; border-radius: 16px; text-decoration: none; box-shadow: 0px 10px 25px rgba(26, 35, 86, 0.15); transition: all 0.2s ease;">На главную</a>
+                
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ЖЕЛЕЗОБЕТОННЫЙ АДАПТИВ ДЛЯ КАРТОЧКИ: Пропиши эти стили в тег <style> вверху файла, если там есть место, либо оставь прямо тут — браузер съест без проблем -->
+    <style>
+                        @media (max-width: 1024px) {
+            /* 1. Полностью обнуляем родительский контейнер, чтобы он не мешал */
+            main { 
+                padding: 0 !important; 
+                margin: 0 !important;
+                display: block !important;
+                height: auto !important;
+                min-height: 0 !important;
+            }
+            
+            /* 2. ХАКЕРСКИЙ ФИКС: Вырываем карточку из потока и крепим жестко под шапку */
+            .coming-soon-card { 
+                position: relative !important;
+                /* Отрицательный маргин огромного масштаба, который перебьет любой флекс-центр */
+                margin: -260px auto 40px auto !important; 
+                
+                width: calc(100% - 40px) !important; 
+                max-width: 340px !important; 
+                padding: 35px 20px !important; 
+                border-radius: 24px !important; 
+                box-sizing: border-box !important;
+                z-index: 5 !important;
+            }
+            
+            .coming-soon-title { 
+                font-size: 28px !important; 
+            }
+        }
+    </style>
+   
+            </div>
+        </div>
+    </main>
+
+</div></div>
+
+        <!-- ==========================================================================
+             НОВЫЙ РАЗДЕЛ: СТИЛЬНЫЙ И ЛАКОНИЧНЫЙ ПОДВАЛ (ФУТЕР)
+             ========================================================================== -->
+        <footer class="footer-section">
+              <div class="footer-container" style="display: flex !important; justify-content: center !important; gap: 180px !important; max-width: 1140px !important; margin: 0 auto !important; padding: 0 20px !important; box-sizing: border-box !important; width: 100% !important;">
+                
+                <!-- ЛЕВАЯ КОЛОНКА: ЮРИДИЧЕСКИЙ БЛОК (ССЫЛКИ И РЕКВИЗИТЫ) -->
+                <div class="footer-left" style="width: auto !important; min-width: 0 !important; flex: 0 1 auto !important;">
+                    <ul class="footer-docs-list">
+                        <!-- Выходим из Правил и заходим в Оферту -->
+                        <li><a href="../Оферта/offer.html">Публичная оферта</a></li>
+                        <!-- Выходим из Правил и заходим в Соглашение -->
+                        <li><a href="../Соглашение/agreement.html">Пользовательское соглашение</a></li>
+                        <!-- Выходим из Правил и заходим в Политику -->
+                        <li><a href="../Политика/privacy.html">Политика конфиденциальности</a></li>
+                        <!-- Мы уже на этой странице, ставим заглушку -->
+                        <li><a href="javascript:void(0);">Правила использования</a></li>
+                    </ul>
+                    
+                    <div class="footer-requisites">
+                        <!-- Впиши сюда свои данные ИП и ИНН вместо точек -->
+                        <p>ИП Тамбовцев Никита</p>
+                        <p>ИНН 362600794362</p>
+                    </div>
+                </div>
+                <!-- ЦЕНТРАЛЬНАЯ КОЛОНКА: ССЫЛКИ НА СТРАНИЦЫ НАПРАВЛЕНИЙ -->
+                <div class="footer-center" style="width: auto !important; min-width: 0 !important; flex: 0 1 auto !important; text-align: left !important;">
+                    <ul class="footer-pages-list">
+                        <li><a href="../Английский/english.html">Английский</a></li>
+                        <li><a href="../Китайский/chinese.html">Китайский</a></li>
+                        <li><a href="../Японский/japanese.html">Японский</a></li>
+                        <li><a href="../Испанский/spanish.html">Испанский</a></li>
+                        <li><a href="../Один на один/one-on-one.html">Один на один</a></li>
+                    </ul>
+                </div>
+
+                <!-- СПРАВА: КОНТАКТЫ И СОЦСЕТИ (ИКОНКИ + СЛОВА) -->
+                <div class="footer-right" style="width: auto !important; min-width: 0 !important; flex: 0 1 auto !important; display: flex !important; align-items: flex-start !important;">
+                    
+                    <!-- TELEGRAM -->
+                    <a href="https://t.me/teatalkshome" target="_blank" class="footer-social-row">
+                        <div class="footer-icon-wrapper">
+                            <!-- Замени telegram.svg на свой векторный файл, когда закинешь его в папку -->
+                            <img src="telegram.svg" alt="Telegram" class="footer-icon-vector" onerror="this.src='icon-stream.svg'">
+                        </div>
+                        <span class="footer-social-text">Telegram</span>
+                    </a>
+
+                    <!-- VK -->
+                    <a href="https://vk.com/teapost" target="_blank" class="footer-social-row">
+                        <div class="footer-icon-wrapper">
+                            <!-- Замени vk.svg на свой векторный файл -->
+                            <img src="vk.svg" alt="ВКонтакте" class="footer-icon-vector" onerror="this.src='icon-private.svg'">
+                        </div>
+                        <span class="footer-social-text">ВКонтакте</span>
+                    </a>
+
+                    <!-- TIK-TOK -->
+                    <a href="https://tiktok.com/@teatalks.ru" target="_blank" class="footer-social-row">
+                        <div class="footer-icon-wrapper">
+                            <!-- Замени tiktok.svg на свой векторный файл -->
+                            <img src="tiktok.svg" alt="TikTok" class="footer-icon-vector" onerror="this.src='icon-self.svg'">
+                        </div>
+                        <span class="footer-social-text">TikTok</span>
+                    </a>
+
+                    <!-- E-MAIL -->
+                    <a href="mailto:nicktambovtsev@gmail.com" class="footer-social-row">
+                        <div class="footer-icon-wrapper">
+                            <!-- Замени email.svg на свой векторный файл -->
+                            <img src="email.svg" alt="Email" class="footer-icon-vector" onerror="this.src='icon-stream.svg'">
+                        </div>
+                        <span class="footer-social-text">E-mail</span>
+                    </a>
+
+                </div>
+
+            </div>
+        </footer>
+    </div> <!-- Закрывает главный .container всего макета -->
+
+    <script>
+        // === ЛОГИКА СКОЛЬЖЕНИЯ К РОЛИКАМ ВЕДУЩЕЙ ===
+        window.addEventListener('load', () => {
+            const videoBtn = document.querySelector('.btn-video');
+            const targetBlock = document.getElementById('videoBlock');
+            
+            if (videoBtn && targetBlock) {
+                videoBtn.addEventListener('click', () => {
+                    targetBlock.scrollIntoView({
+                        behavior: 'smooth', // Идеально плавное проскальзывание
+                        block: 'start'      // Остановит экран ровно на начале блока
+                    });
+                });
+            }
+        });
+
+        // === ЛОГИКА 1: ПЕРВЫЙ ГЛАВНЫЙ СЛАЙДЕР ===
+        const track = document.getElementById('sliderTrack');
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+        const slides = document.querySelectorAll('.slide-item');
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+
+        function updateSlider() {
+            if (track) track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        if (btnNext) {
+            btnNext.addEventListener('click', () => {
+                if (currentIndex < totalSlides - 1) currentIndex++;
+                else currentIndex = 0;
+                updateSlider();
+            });
+        }
+
+        if (btnPrev) {
+            btnPrev.addEventListener('click', () => {
+                if (currentIndex > 0) currentIndex--;
+                else currentIndex = totalSlides - 1;
+                updateSlider();
+            });
+        }
+
+        if (track) {
+            let touchStartX = 0, touchEndX = 0;
+            track.addEventListener('touchstart', (e) => { if (e.changedTouches) touchStartX = e.changedTouches.screenX; }, { passive: true });
+            track.addEventListener('touchend', (e) => { if (e.changedTouches) { touchEndX = e.changedTouches.screenX; handleSwipe(); } }, { passive: true });
+
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                if (touchStartX - touchEndX > swipeThreshold) { if (currentIndex < totalSlides - 1) currentIndex++; updateSlider(); }
+                else if (touchEndX - touchStartX > swipeThreshold) { if (currentIndex > 0) currentIndex--; updateSlider(); }
+            }
+        }
+              // === ЛОГИКА 1.5: АВТОМАТИЧЕСКИЙ КАЛЕНДАРЬ ОПАДАЮЩЕЙ САКУРЫ (ИСПРАВЛЕНО: ПРОЦЕНТНОЕ СКАЛИРОВАНИЕ) ===
+        window.addEventListener('load', () => {
+            const container = document.getElementById('sakuraTreeContainer');
+            const leavesLeftEl = document.getElementById('leavesLeft');
+            const daysUntilStartEl = document.getElementById('daysUntilStart');
+            if (!container) return;
+
+            // Назначаем целевую дату старта курса — 1 сентября текущего года
+            const currentYear = new Date().getFullYear();
+            const startDate = new Date(currentYear, 6, 8); 
+            const today = new Date();
+
+            const timeDiff = startDate.getTime() - today.getTime();
+            let daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+            
+            if (daysRemaining < 0) daysRemaining = 0;
+            if (daysRemaining > 30) daysRemaining = 30; 
+
+            const activeLeavesCount = daysRemaining;
+
+            if (leavesLeftEl) leavesLeftEl.textContent = activeLeavesCount;
+            if (daysUntilStartEl) daysUntilStartEl.textContent = daysRemaining;
+
+            // ИСПРАВЛЕНО: Перевели координаты из жестких пикселей (px) в проценты (%).
+            // Теперь лепестки привязаны к картинке намертво на любых смартфонах!
+            const leafCoordinates = [
+                {x: 23, y: 22}, {x: 28, y: 17}, {x: 32, y: 21}, {x: 38, y: 15}, {x: 42, y: 24},
+                {x: 46, y: 18}, {x: 51, y: 23}, {x: 55, y: 13}, {x: 60, y: 27}, {x: 64, y: 19},
+                {x: 25, y: 32}, {x: 30, y: 28}, {x: 35, y: 34}, {x: 40, y: 30}, {x: 45, y: 37},
+                {x: 50, y: 33}, {x: 54, y: 39}, {x: 59, y: 29}, {x: 63, y: 36}, {x: 68, y: 26},
+                {x: 27, y: 44}, {x: 33, y: 41}, {x: 38, y: 47}, {x: 43, y: 42}, {x: 48, y: 49},
+                {x: 52, y: 43}, {x: 57, y: 52}, {x: 62, y: 46}, {x: 66, y: 48}, {x: 71, y: 38}
+            ];
+
+            // Генерируем лепестки
+            for (let i = 0; i < 30; i++) {
+                const leaf = document.createElement('div');
+                leaf.className = 'tree-leaf-vector';
+                
+                const coords = leafCoordinates[i] || {x: 50, y: 40};
+                
+                // ИСПРАВЛЕНО: Позиционируем через проценты (%) вместо пикселей
+                leaf.style.left = coords.x + '%';
+                leaf.style.top = coords.y + '%';
+
+                // Если по дням лепесток уже должен опасть — уводим его вниз плашки на землю
+                if (i >= activeLeavesCount) {
+                    leaf.classList.add('fallen');
+                    // Разбрасываем лепестки по земле в процентах
+                    leaf.style.top = Math.floor(Math.random() * (96 - 88) + 88) + '%';
+                    leaf.style.left = Math.floor(Math.random() * (85 - 15) + 15) + '%';
+                }
+
+                container.appendChild(leaf);
+            }
+        });
+
+        // === ЛОГИКА 2: ВТОРОЙ СЛАЙДЕР ===
+        const tTrack = document.getElementById('teachersSliderTrack');
+        const tBtnPrev = document.getElementById('tBtnPrev');
+        const tBtnNext = document.getElementById('tBtnNext');
+        const tCards = document.querySelectorAll('.teachers-card');
+        let tCurrentIndex = 0;
+
+        function updateTeachersSlider() {
+            if (!tTrack) return;
+            const isMobile = window.innerWidth <= 992;
+            const windowWidth = document.querySelector('.teachers-slider-window').clientWidth;
+            const gap = isMobile ? 20 : 30;
+            const cardWidth = isMobile ? windowWidth : (windowWidth - (gap * 2)) / 3;
+            const step = isMobile ? 1 : 3;
+            const offset = tCurrentIndex * step * (cardWidth + gap);
+            tTrack.style.transform = `translateX(-${offset}px)`;
+        }
+
+        if (tBtnNext) {
+            tBtnNext.addEventListener('click', () => {
+                const isMobile = window.innerWidth <= 992;
+                const maxIndex = isMobile ? tCards.length - 1 : 1;
+                if (tCurrentIndex < maxIndex) tCurrentIndex++;
+                else tCurrentIndex = 0;
+                updateTeachersSlider();
+            });
+        }
+
+        if (tBtnPrev) {
+            tBtnPrev.addEventListener('click', () => {
+                const isMobile = window.innerWidth <= 992;
+                const maxIndex = isMobile ? tCards.length - 1 : 1;
+                if (tCurrentIndex > 0) tCurrentIndex--;
+                else tCurrentIndex = maxIndex;
+                updateTeachersSlider();
+            });
+        }
+
+        window.addEventListener('resize', updateTeachersSlider);
+
+        if (tTrack) {
+            let tTouchStartX = 0, tTouchEndX = 0;
+            tTrack.addEventListener('touchstart', (e) => { if (e.changedTouches) tTouchStartX = e.changedTouches.screenX; }, { passive: true });
+            tTrack.addEventListener('touchend', (e) => { if (e.changedTouches) { tTouchEndX = e.changedTouches.screenX; handleTeachersSwipe(); } }, { passive: true });
+
+            function handleTeachersSwipe() {
+                const swipeThreshold = 50;
+                const isMobile = window.innerWidth <= 992;
+                const maxIndex = isMobile ? tCards.length - 1 : 1;
+                if (tTouchStartX - tTouchEndX > swipeThreshold) { if (tCurrentIndex < maxIndex) tCurrentIndex++; updateTeachersSlider(); }
+                else if (tTouchEndX - tTouchStartX > swipeThreshold) { if (tCurrentIndex > 0) tCurrentIndex--; updateTeachersSlider(); }
+            }
+        }
+
+        // === ИНТЕРАКТИВ И ВИДЕОПОЛЗУНКИ ===
+        function moveButterfliesRandomly() {
+            const box = document.querySelector('.hero-image-box');
+            const gif = document.querySelector('.butterflies-gif');
+            if (!box || !gif) return;
+            const randomX = Math.floor(Math.random() * (box.clientWidth - 130));
+            const randomY = Math.floor(Math.random() * (box.clientHeight - 130));
+            gif.style.left = randomX + 'px'; gif.style.top = randomY + 'px';
+        }
+
+        function linkVideoToProgressBar(videoId, progressId) {
+            const video = document.getElementById(videoId);
+            const progress = document.getElementById(progressId);
+            if (!video || !progress) return;
+            function updateProgress() {
+                if (!video.paused && !video.ended) { progress.style.width = ((video.currentTime / video.duration) * 100) + '%'; }
+                requestAnimationFrame(updateProgress);
+            }
+            video.addEventListener('play', () => { requestAnimationFrame(updateProgress); });
+            video.addEventListener('seeking', () => { progress.style.width = ((video.currentTime / video.duration) * 100) + '%'; });
+        }
+
+        // === ЛОГИКА 3: НЕУБИВАЕМОЕ ПЕРЕКЛЮЧЕНИЕ ТЕКСТА В КАРТОЧКЕ ===
+        window.addEventListener('load', () => {
+            moveButterfliesRandomly();
+            const gif = document.querySelector('.butterflies-gif');
+            if (gif) gif.addEventListener('mouseenter', moveButterfliesRandomly);
+            linkVideoToProgressBar('videoPolina', 'progressPolina');
+            linkVideoToProgressBar('videoTanya', 'progressTanya');
+            updateTeachersSlider();
+
+            const founderToggleBtn = document.getElementById('founderToggleBtn');
+            const founderContentQuote = document.getElementById('founderContentQuote');
+            const founderContentAchievements = document.getElementById('founderContentAchievements');
+            const founderBtnText = founderToggleBtn ? founderToggleBtn.querySelector('.founder-btn-text') : null;
+
+            if (founderToggleBtn && founderContentQuote && founderContentAchievements) {
+                founderToggleBtn.addEventListener('click', (e) => {
+                    e.preventDefault(); 
+                    founderToggleBtn.classList.toggle('flipped');
+                    if (founderContentQuote.classList.contains('active')) {
+                        founderContentQuote.classList.remove('active');
+                        founderContentAchievements.classList.add('active');
+                        if (founderBtnText) founderBtnText.textContent = 'Назад';
+                    } else {
+                        founderContentAchievements.classList.remove('active');
+                        founderContentQuote.classList.add('active');
+                        if (founderBtnText) founderBtnText.textContent = 'Достижения';
+                    }
+                });
+            }
+        });
+
+        function goToHomeSlide() { currentIndex = 0; updateSlider(); }
+
+        const burgerBtn = document.getElementById('burgerBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (burgerBtn && mobileMenu) {
+            burgerBtn.addEventListener('click', () => {
+                burgerBtn.classList.toggle('active');
+                mobileMenu.classList.toggle('open');
+            });
+        }
+
+        // === ИСПРАВЛЕНО: АВТО-ЗАКРЫТИЕ МЕНЮ БУРГЕРА ПРИ КЛИКЕ НА "О НАС" ===
+        const mobileAboutLink = document.querySelector('#mobileMenu .btn-about');
+        if (mobileAboutLink && burgerBtn && mobileMenu) {
+            mobileAboutLink.addEventListener('click', () => {
+                burgerBtn.classList.remove('active'); // Убираем крестик, возвращаем три полоски
+                mobileMenu.classList.remove('open');  // Плавно прячем белую плашку меню
+            });
+        }
+
+        // === ЛОГИКА 4: БЕСКОНЕЧНЫЙ ЕЖЕДНЕВНЫЙ ТАЙМЕР С ЗАЩИТОЙ ОТ ОБНОВЛЕНИЯ ===
+        window.addEventListener('load', () => {
+            function updateDailyPersistentTimer() {
+                const now = new Date();
+                
+                // Рассчитываем жесткую точку полуночи на конец текущих суток (23:59:59)
+                const midnight = new Date(
+                    now.getFullYear(), 
+                    now.getMonth(), 
+                    now.getDate(), 
+                    23, 59, 59, 999
+                );
+                
+                const difference = midnight.getTime() - now.getTime();
+
+                // Если наступила полночь — бесшовно перезапускаем цикл на следующие сутки
+                if (difference <= 0) {
+                    setTimeout(updateDailyPersistentTimer, 1000);
+                    return;
+                }
+
+                // Переводим миллисекунды в часы, минуты и секунды до конца дня
+                const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+                const minutes = Math.floor((difference / 1000 / 60) % 60);
+                const seconds = Math.floor((difference / 1000) % 60);
+
+                // Ищем элементы цифр на странице
+                const hEl = document.getElementById('timerHours');
+                const mEl = document.getElementById('timerMinutes');
+                const sEl = document.getElementById('timerSeconds');
+
+                // Если была надпись "Акция завершена", этот код вернет структуру цифр обратно
+                const timerContainer = document.getElementById('promoTimer');
+                if (timerContainer && timerContainer.innerHTML.includes('ЗАВЕРШЕНА')) {
+                    timerContainer.innerHTML = `
+                        <div class="countdown-block"><span class="countdown-number" id="timerHours">00</span><span class="countdown-label">час</span></div>
+                        <div class="countdown-separator">:</div>
+                        <div class="countdown-block"><span class="countdown-number" id="timerMinutes">00</span><span class="countdown-label">минуты</span></div>
+                        <div class="countdown-separator">:</div>
+                        <div class="countdown-block"><span class="countdown-number" id="timerSeconds">00</span><span class="countdown-label">секунды</span></div>
+                    `;
+                    // Повторно вызываем функцию, чтобы сразу подставить правильные цифры
+                    updateDailyPersistentTimer();
+                    return;
+                }
+
+                // Добавляем ведущие нули (чтобы вместо "5" секунд горело "05")
+                if (hEl) hEl.textContent = String(hours).padStart(2, '0');
+                if (mEl) mEl.textContent = String(minutes).padStart(2, '0');
+                if (sEl) sEl.textContent = String(seconds).padStart(2, '0');
+            }
+
+            // Запускаем тиканье каждую секунду
+            updateDailyPersistentTimer();
+            setInterval(updateDailyPersistentTimer, 1000);
+        });
+        // === ЛОГИКА 5: ИНТЕРАКТИВНЫЙ POP-UP ДЛЯ ФОТО НАГРАЖДЕНИЯ ===
+        window.addEventListener('load', () => {
+            const openLink = document.getElementById('openAwardPopup');
+            const closeBtn = document.getElementById('closeAwardPopup');
+            const overlay = document.getElementById('awardPopupOverlay');
+
+            if (openLink && closeBtn && overlay) {
+                openLink.addEventListener('click', (e) => {
+                    e.preventDefault(); 
+                    overlay.classList.add('show');
+                });
+
+                closeBtn.addEventListener('click', () => {
+                    overlay.classList.remove('show');
+                });
+
+                overlay.addEventListener('click', (e) => {
+                    if (e.target === overlay) {
+                        overlay.classList.remove('show');
+                    }
+                });
+            }
+        });
+        // === ЛОГИКА 6: ИНТЕРАКТИВНЫЙ FAQ АККОРДЕОН ===
+        window.addEventListener('load', () => {
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const trigger = item.querySelector('.faq-trigger');
+                const content = item.querySelector('.faq-content');
+
+                if (trigger && content) {
+                    trigger.addEventListener('click', () => {
+                        const isOpen = item.classList.contains('active');
+
+                        // Сначала закрываем все остальные открытые вкладки (эффект одиночного аккордеона)
+                        faqItems.forEach(otherItem => {
+                            if (otherItem !== item) {
+                                otherItem.classList.remove('active');
+                                const otherContent = otherItem.querySelector('.faq-content');
+                                if (otherContent) otherContent.style.maxHeight = null;
+                            }
+                        });
+
+                        // Тогглим состояние текущего вопроса
+                        if (isOpen) {
+                            item.classList.remove('active');
+                            content.style.maxHeight = null;
+                        } else {
+                            item.classList.add('active');
+                            // Магия: считываем реальную высоту текста и даем ее блоку для плавной анимации
+                            content.style.maxHeight = content.scrollHeight + "px";
+                        }
+                    });
+                }
+            });
+        });
+// ЖЕЛЕЗНЫЙ СКРИПТ-СХЛОПЫВАТЕЛЬ ЗАЗОРОВ В ПОДВAЛЕ НА МОБИЛКАХ
+document.addEventListener("DOMContentLoaded", () => {
+    const fixMobileFooterGaps = () => {
+        // Срабатывает строго на мобилках и планшетах (меньше 768px)
+        if (window.innerWidth <= 768) {
+            
+            // 1. Сжимаем отступы главного контейнера подвала
+            const footerSection = document.querySelector('.footer-section');
+            if (footerSection) {
+                footerSection.style.setProperty('padding', '30px 20px', 'important');
+                footerSection.style.setProperty('margin-top', '30px', 'important');
+                footerSection.style.setProperty('height', 'auto', 'important');
+                footerSection.style.setProperty('min-height', 'auto', 'important');
+            }
+
+            // 2. Уничтожаем километровый gap между колонками
+            const footerContainer = document.querySelector('.footer-container');
+            if (footerContainer) {
+                footerContainer.style.setProperty('gap', '15px', 'important');
+            }
+
+            // 3. Обнуляем нижние маргины у левого и центрального блоков
+            const footerCols = document.querySelectorAll('.footer-left, .footer-center');
+            footerCols.forEach(col => {
+                col.style.setProperty('margin', '0 auto 0 auto', 'important');
+            });
+
+            // 4. Убираем костыльный отрицательный маргин у правого блока
+            const footerRight = document.querySelector('.footer-right');
+            if (footerRight) {
+                footerRight.style.setProperty('margin', '0 auto', 'important');
+            }
+
+            // 5. Ужимаем воздух под списками документов и заголовками
+            const docLists = document.querySelectorAll('.footer-docs-list, .footer-social-title');
+            docLists.forEach(item => {
+                item.style.setProperty('margin-bottom', '2px', 'important');
+            });
+        }
+    };
+
+    // Запускаем фикс при загрузке страницы и при изменении размеров экрана
+    fixMobileFooterGaps();
+    window.addEventListener('resize', fixMobileFooterGaps);
+});
+
+                   </script>
+<script>
+window.replainSettings = { id: '77b3e2cb-c3e1-458a-a12d-c1dc20c0bd76' };
+(function(u){var s=document.createElement('script');s.async=true;s.src=u;
+var x=document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);
+})('https://widget.replain.cc/dist/client.js');
+</script>
+</body>
+</html>
+
+
