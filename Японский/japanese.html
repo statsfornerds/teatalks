@@ -2115,6 +2115,18 @@
             margin: 0 !important; /* Сбрасываем лишние десктопные маргины */
         }
     }
+        /* ==========================================================================
+           УВЕЛИЧЕНИЕ ГЛАВНОЙ КАРТИНКИ (ТОЛЬКО ДЛЯ ДЕСКТОПА)
+           ========================================================================== */
+        @media (min-width: 993px) {
+            .hero-image-box {
+                flex: 0 0 600px !important; 
+                width: 600px !important;
+            }
+            .main-img {
+                max-width: 600px !important; 
+            }
+        }
            </style>
 </head>
 <body>
@@ -2193,24 +2205,24 @@
                     <!-- СЛАЙД 1 (Японский) -->
                     <div class="slide-item">
                         <div class="hero-content">
-                            <span class="badge">второй поток</span>
+                            <span class="badge">старт в 2027</span>
                             <h1 class="hero-title">
                                 <span>Японский</span><br>который тебя удивит
                             </h1>
                             <p class="hero-description">
-                                16 лет Полина Гин оттачивала опыт преподавательства, чтобы поделиться с тобой знаниями в новом 24-часовом потоке по японскому. Да, можно с нуля!<br> Осталось: 8 мест из 12
+                                Скоро здесь будет настоящий сенсей.<br> К слову, не хочешь им стать?
                             </p>
                             <div class="cta-buttons">
-                                <button class="btn-primary">Купить поток</button>
+                                <a href="https://t.me/Alex_Psy_Sun" target="_blank" class="btn-primary" style="text-decoration: none; display: inline-block;">Стать ведущим</a>
                                 <button class="btn-video">
                                     <span class="play-icon"></span>
-                                    Ролики с ведущими
+                                    Ролики с нами
                                 </button>
                             </div>
                         </div>
                         <div class="hero-image-box">
                             <img src="butterflies.gif" alt="Бабочки" class="butterflies-gif">
-                            <img src="girl-and-kitty.png" alt="Полина Гин" class="main-img">
+                            <img src="shiba9.png" alt="Полина Гин" class="main-img">
                         </div>
                     </div>
 
