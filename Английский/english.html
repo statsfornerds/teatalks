@@ -2066,7 +2066,7 @@
                                 24 часа праймового английского. Полная противоположность тому, что тебе преподавали в школе и вузе. С амбициозными ребятами, online-активностями и опытным ведущим Рустамом Пашаевым ты сможешь саморазвиваться. Не через зубрежку, через развлечение, общение и страсть.
                             </p>
                             <div class="cta-buttons">
-                                <button class="btn-primary">Записаться</button>
+<button class="btn-primary" onclick="openWaitlistModal('Рустам Пашаев', 'host-4.JPG', 'Английский')">Записаться</button>
                             </div>
                         </div>
                         
@@ -3440,6 +3440,124 @@ var x=document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);
     canvas.addEventListener("touchend", () => { isDrawing = false; });
     canvas.addEventListener("touchcancel", () => { isDrawing = false; });
 })();
+</script>
+<!-- МОДАЛЬНОЕ ОКНО ЛИСТА ОЖИДАНИЯ -->
+<div id="waitlist-overlay" onclick="closeWaitlistModal()" style="position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; background: rgba(26, 35, 86, 0.5) !important; z-index: 9999991 !important; display: flex !important; align-items: center !important; justify-content: center !important; opacity: 0 !important; pointer-events: none !important; transition: opacity 0.3s ease !important; backdrop-filter: blur(12px) !important; box-sizing: border-box !important;">
+    
+    <div id="waitlist-content" onclick="event.stopPropagation()" style="position: relative !important; width: 450px !important; max-width: 95% !important; background: #ffffff !important; padding: 35px 30px !important; border-radius: 32px !important; box-shadow: 0 35px 80px rgba(26, 35, 86, 0.2) !important; transform: scale(0.85) translateY(20px) !important; transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important; box-sizing: border-box !important; text-align: left !important;">
+        
+        <!-- Крестик закрытия -->
+        <div onclick="closeWaitlistModal()" style="position: absolute !important; top: 25px !important; right: 25px !important; width: 36px !important; height: 36px !important; background: #F4F5F9 !important; color: #1A2356 !important; border-radius: 50% !important; display: flex !important; align-items: center !important; justify-content: center !important; font-size: 20px !important; font-weight: bold !important; cursor: pointer !important; user-select: none;">×</div>
+        
+        <!-- Шапка с авто-языком -->
+        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid rgba(26,35,86,0.06);">
+            <div style="width: 55px; height: 55px; border-radius: 50%; overflow: hidden; border: 2px solid #1A2356; background: #E6C594; flex-shrink: 0;">
+                <img id="wl-teacher-img" src="" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div>
+                <div style="font-size: 13px; font-weight: 700; color: #FFB020; text-transform: uppercase; letter-spacing: 0.5px;">Лист ожидания</div>
+                <h4 id="wl-teacher-name" style="font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 800; color: #1A2356; margin: 0; letter-spacing: -0.5px;"></h4>
+                <div id="wl-language-display" style="font-size: 13px; font-weight: 600; color: #5E6282; margin-top: 4px;"></div>
+            </div>
+        </div>
+
+        <!-- Упрощенная форма только с почтой -->
+        <form onsubmit="submitWaitlistForm(event)">
+            <label style="font-size: 14px; font-weight: 800; color: #1A2356; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 12px;">Твоя почта для связи</label>
+            <input type="email" id="wl-email" placeholder="example@mail.com" required style="width: 100%; padding: 14px 16px; border-radius: 14px; border: 1px solid rgba(26,35,86,0.15); font-size: 14px; font-weight: 600; font-family: 'Poppins', sans-serif; color: #1A2356; outline: none; background: #F8F9FC; margin-bottom: 25px; box-sizing: border-box;">
+            
+            <button type="submit" style="width: 100%; background: #1A2356; color: #ffffff; border: none; font-size: 16px; font-weight: 700; padding: 16px; border-radius: 16px; cursor: pointer; box-shadow: 0 6px 20px rgba(26,35,86,0.15); transition: all 0.3s ease;" onmouseover="this.style.background='#FFB020'; this.style.color='#1A2356';" onmouseout="this.style.background='#1A2356'; this.style.color='#ffffff';">
+                Записаться в лист ожидания
+            </button>
+        </form>
+    </div>
+</div>
+<script>
+// ==========================================================================
+// ДВИЖОК ЛИСТА ОЖИДАНИЯ (УПРОЩЕННЫЙ)
+// ==========================================================================
+let waitlistTeacher = "";
+let waitlistLanguage = "";
+const WL_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw4th92E8n3TrCJ5FNFNi4KzlvYDM48vvJBX3BLlENqBNA87cOFwydor3CWZTKs8UZDXQ/exec"; // Вставь свой URL
+const WL_BOT_TOKEN = "8817012587:AAH6vIR5niqxtVz6jhPstL4Ni6uHMtMKTpg";
+const WL_CHAT_ID = "311593316";
+
+window.openWaitlistModal = function(teacherName, teacherImg, language) {
+    waitlistTeacher = teacherName;
+    waitlistLanguage = language || "Не указан";
+    
+    document.getElementById("wl-teacher-name").innerText = teacherName;
+    document.getElementById("wl-language-display").innerText = "Язык: " + waitlistLanguage;
+    
+    const img = document.getElementById("wl-teacher-img");
+    if (img) {
+        img.src = teacherImg;
+        img.onerror = function() { this.src = 'https://ui-avatars.com/api/?name=' + encodeURIComponent(teacherName) + '&background=E6C594&color=1A2356'; };
+    }
+    
+    const overlay = document.getElementById("waitlist-overlay");
+    const content = document.getElementById("waitlist-content");
+    if (overlay && content) {
+        overlay.style.pointerEvents = "auto";
+        overlay.style.opacity = "1";
+        content.style.transform = "scale(1) translateY(0)";
+    }
+};
+
+window.closeWaitlistModal = function() {
+    const overlay = document.getElementById("waitlist-overlay");
+    const content = document.getElementById("waitlist-content");
+    if (overlay && content) {
+        overlay.style.pointerEvents = "none";
+        overlay.style.opacity = "0";
+        content.style.transform = "scale(0.85) translateY(20px)";
+    }
+};
+
+window.submitWaitlistForm = function(event) {
+    event.preventDefault();
+    const emailInput = document.getElementById("wl-email").value.trim();
+    
+    if (!emailInput) {
+        alert("Пожалуйста, укажи свою почту!");
+        return;
+    }
+
+    const submitBtn = event.target.querySelector("button[type='submit']");
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.innerText = "Отправляем..."; }
+
+    // 1. Отправка в Telegram
+    const textMessage = `🔥 НОВАЯ ЗАЯВКА В ЛИСТ ОЖИДАНИЯ!\n👤 Ведущий: ${waitlistTeacher}\n🌐 Язык: ${waitlistLanguage}\n✉️ Почта: ${emailInput}\n📄 Страница: ${window.location.href}`;
+    const telegramUrl = `https://api.telegram.org/bot${WL_BOT_TOKEN}/sendMessage?chat_id=${WL_CHAT_ID}&text=${encodeURIComponent(textMessage)}`;
+    fetch(telegramUrl).catch(e => console.log("Ошибка ТГ:", e));
+
+    // 2. Отправка в Google Таблицу
+    const waitlistData = { 
+        type: "waitlist",
+        teacher: waitlistTeacher, 
+        language: waitlistLanguage, 
+        email: emailInput, 
+        page: window.location.href,
+        name: emailInput 
+    };
+    
+    fetch(WL_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(waitlistData)
+    })
+    .then(() => {
+        alert(`🎉 Готово! Ты в листе ожидания. Мы напишем на ${emailInput}, как только освободится место!`);
+        closeWaitlistModal();
+        document.getElementById("wl-email").value = "";
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.innerText = "Записаться в лист ожидания"; }
+    })
+    .catch(err => {
+        alert("Ошибка сети. Попробуй еще раз или напиши нам напрямую!");
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.innerText = "Записаться в лист ожидания"; }
+    });
+};
 </script>
 </body>
 </html>

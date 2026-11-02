@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap&subset=cyrillic,cyrillic-ext" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
     <style>
         /* Базовые сбросы стилей */
         * {
@@ -2059,7 +2059,7 @@
 
         </header>
 
-        <!-- Контейнер слайдера -->
+                <!-- Контейнер слайдера -->
         <div class="slider-section">
             <div class="slider-btn-prev" id="btnPrev">←</div>
             <div class="slider-btn-next" id="btnNext">→</div>
@@ -2067,36 +2067,10 @@
             <div class="slider-window">
                 <div class="slider-track" id="sliderTrack">
                     
-                    <!-- СЛАЙД 1 (Японский) -->
+                    <!-- СЛАЙД 1 (Китайский) -->  
                     <div class="slide-item">
                         <div class="hero-content">
-                            <span class="badge">второй поток</span>
-                            <h1 class="hero-title">
-                                <span>Японский</span><br>который тебя удивит
-                            </h1>
-                            <p class="hero-description">
-                                16 лет Полина Гин оттачивала опыт преподавательства, чтобы поделиться с тобой знаниями в новом онлайн-потоке по японскому. Да, можно с нуля!<br> Осталось: 8 мест из 12
-                            </p>
-                            <div class="cta-buttons">
-                    <div class="btn-primary">
-    <a href="Японский/japanese.html" style="text-decoration: none !important;">Узнать больше</a>
-</div>
-                                <button class="btn-video">
-                                    <span class="play-icon"></span>
-                                    Ролики с ведущей
-                                </button>
-                            </div>
-                        </div>
-                        <div class="hero-image-box">
-                            <img src="butterflies.gif" alt="Бабочки" class="butterflies-gif">
-                            <img src="girl-and-kitty.png" alt="Полина Гин" class="main-img">
-                        </div>
-                    </div>
-
-                    <!-- СЛАЙД 2 (Китайский) -->
-                    <div class="slide-item">
-                        <div class="hero-content">
-                            <span class="badge">четвертый поток</span>
+                            <span class="badge">пятый поток</span>
                             <h1 class="hero-title">
                                 <span>Китайский</span><br>для работы и жизни
                             </h1>
@@ -2104,7 +2078,9 @@
                                 Прокачай свой разговорный уровень всего за 3 месяца по уникальной методике погружения в языковую среду.
                             </p>
                             <div class="cta-buttons">
-                                <button class="btn-primary"><a href="Китайский/chinese.html" style="text-decoration: none !important;">Узнать больше</a>
+                                <button class="btn-primary">
+                                    <a href="Китайский/chinese.html" style="text-decoration: none !important; color: #ffffff;">Узнать больше</a>
+                                </button>
                             </div>
                         </div>
                         <div class="hero-image-box">
@@ -2113,9 +2089,51 @@
                         </div>
                     </div>
 
-                </div>
-            </div>
-        </div>
+                    <!-- СЛАЙД 2 (Английский) -->
+                    <div class="slide-item">
+                        <div class="hero-content">
+                            <span class="badge">третий поток</span>
+                            <h1 class="hero-title">
+                                <span>Английский</span><br>по фану и с пользой
+                            </h1>
+                            <p class="hero-description">
+                                24 часа праймового английского. Противоположность тому, что тебе преподавали в школе и вузе. С амбициозными ребятами, online-активностями и опытным ведущим Рустамом Пашаевым ты сможешь саморазвиваться. Не через зубрежку, через развлечение, общение и страсть.
+                            </p>
+                            <div class="cta-buttons">
+                                <button class="btn-primary">
+ <a href="Английский/English.html" style="text-decoration: none !important; color: #ffffff;">Узнать больше</a>
+</button>
+                            </div>
+                        </div>
+                        
+                        <div class="hero-image-box" style="position: relative !important; overflow: visible !important;">
+                            
+                            <!-- МАГИЧЕСКАЯ ЗОНА: Ловит курсор мыши -->
+                            <div class="magic-pointer-zone" 
+                                 onmouseenter="startAppleMagic()" 
+                                 onmouseleave="stopAppleMagic()"
+                                 style="position: absolute !important; top: 300px !important; left: -120px !important; width: 280px !important; height: 280px !important; z-index: 999999 !important; cursor: pointer !important; background: rgba(0,0,0,0) !important;">
+                                
+                                <!-- iOS ПЛАШКА -->
+                                <div id="magic-text-node" style="position: absolute !important; top: 10px !important; left: 50% !important; transform: translateX(-50%) translateY(10px) !important; opacity: 0 !important; transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important; pointer-events: none !important; text-align: center !important; width: 200px !important;">
+                                    
+                                    <!-- МАГИЧЕСКОЕ СВЕЧЕНИЕ -->
+                                    <div style="position: absolute !important; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 160px; height: 80px; background: radial-gradient(circle, rgba(255, 176, 32, 0.45) 0%, rgba(241, 165, 1, 0.2) 50%, rgba(255,255,255,0) 100%); filter: blur(14px); z-index: 1; pointer-events: none !important;"></div>
+                                    
+                                    <!-- САМ ТЕКСТ -->
+                                    <span id="ios-text-changer" style="font-family: 'Alex Brush', cursive, sans-serif !important; font-size: 52px !important; font-weight: 400 !important; color: #ffffff !important; text-shadow: 0 2px 10px rgba(26, 35, 86, 0.3), 0 0 20px rgba(255, 255, 255, 0.4) !important; transition: opacity 0.3s ease, transform 0.3s ease !important; display: inline-block !important; position: relative !important; z-index: 2 !important; line-height: 1 !important;">hello</span>
+                                    
+                                </div>
+                            </div>
+
+                            <img src="magic.gif" alt="Китайский декор" style="position: absolute !important; left: -100px !important; top: 320px !important; width: 240px !important; height: auto !important; z-index: 2 !important;">
+                            <img src="host-4.PNG" alt="Рустам" style="width: 100% !important; max-width: 420px !important; height: auto !important; display: block !important; object-fit: contain !important; opacity: 1 !important;">
+                        </div>
+                    </div>
+
+                </div> <!-- закрывает slider-track -->
+            </div> <!-- закрывает slider-window -->
+        </div> <!-- закрывает slider-section -->
 
         <!-- РАЗДЕЛ: РОЛИКИ С ВЕДУЩИМИ -->
         <section class="video-section" id="videoBlock">
@@ -2293,7 +2311,7 @@
                     </div>
 
                     <!-- ВЕДУЩИЙ 5 -->
-                    <div class="teachers-card">
+                    <div class="teachers-card" style="display: none !important;">
                         <div class="teacher-img-box">
                             <img src="pol.png" alt="Полина" class="teacher-photo" onerror="this.onerror=null; this.src='tanya.png';">
                         </div>
@@ -2980,6 +2998,48 @@ window.addEventListener("load", function() {
         }
     }
 });
+</script>
+<script>
+// IOS SETUP SCREEN: Приветствия на разных языках
+const iosGreetings = ["hello", "привет", "bonjour", "hola", "ciao", "你好", "konnichiwa"];
+let iosIndex = 0;
+let iosInterval = null;
+
+function startAppleMagic() {
+    const node = document.getElementById('magic-text-node');
+    const textSpan = document.getElementById('ios-text-changer');
+    
+    if (!node || !textSpan) return;
+    
+    node.style.opacity = '1'; 
+    node.style.transform = 'translateX(-50%) translateY(0)';
+    
+    iosIndex = 0;
+    textSpan.innerText = iosGreetings[iosIndex];
+
+    iosInterval = setInterval(function() {
+        iosIndex = (iosIndex + 1) % iosGreetings.length;
+        
+        textSpan.style.opacity = '0';
+        textSpan.style.transform = 'scale(0.92)';
+        
+        setTimeout(function() {
+            textSpan.innerText = iosGreetings[iosIndex];
+            textSpan.style.opacity = '1';
+            textSpan.style.transform = 'scale(1)';
+        }, 300);
+        
+    }, 1600);
+}
+
+function stopAppleMagic() {
+    const node = document.getElementById('magic-text-node');
+    if (!node) return;
+    
+    node.style.opacity = '0'; 
+    node.style.transform = 'translateX(-50%) translateY(10px)';
+    clearInterval(iosInterval);
+}
 </script>
 <script>
 window.replainSettings = { id: '77b3e2cb-c3e1-458a-a12d-c1dc20c0bd76' };
