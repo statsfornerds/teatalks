@@ -2703,6 +2703,40 @@ window.replainSettings = { id: '77b3e2cb-c3e1-458a-a12d-c1dc20c0bd76' };
 var x=document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);
 })('https://widget.replain.cc/dist/client.js');
 </script>
+<!-- ==========================================================================
+     ИНТЕГРАЦИЯ ОПЛАТЫ Т-БАНК (ШАГ 1: Подключение скрипта)
+     ========================================================================== -->
+<script src="https://integrationjs.t-static.ru/integration.js" onload="onPaymentIntegrationLoad()" async></script>
+
+<script>
+  // КОНФИГУРАЦИЯ Т-БАНКА
+  const initConfig = {
+    // ВСТАВЬ СЮДА СВОЙ TerminalKey из личного кабинета Т-Банка (например, '1234567890DEMO')
+    terminalKey: '1748129314292DEMO', 
+    product: 'eacq',
+    features: {
+      payment: {},      // Модуль кнопок оплаты
+      iframe: {},       // Модуль для открытия формы оплаты в iframe (то, что нам нужно)
+      addcard: {
+        iframe: {},     // Модуль привязки карты
+      },
+      preinit: {
+        iframe: {}      // Модуль предплатежной формы
+      }
+    }
+  };
+
+  // Функция инициализации, которая вызовется автоматически после загрузки скрипта
+  function onPaymentIntegrationLoad() {
+    PaymentIntegration.init(initConfig)
+      .then(() => {
+        console.log('✅ Виджет Т-Банка успешно инициализирован');
+      })
+      .catch((error) => {
+        console.error('❌ Ошибка инициализации виджета Т-Банка:', error);
+      });
+  }
+</script>
 </body>
 </html>
 

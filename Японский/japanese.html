@@ -2127,6 +2127,104 @@
                 max-width: 600px !important; 
             }
         }
+/* ==========================================================================
+   АДАПТИВ БЛОКА ОПЛАТЫ ПОД МОБИЛКИ
+   ========================================================================== */
+@media (max-width: 768px) {
+    .payment-section {
+        padding: 40px 0 !important;
+    }
+    
+    .payment-section h2[style*="font-size: 42px"] {
+        font-size: 26px !important;
+        margin-bottom: 15px !important;
+        line-height: 1.2 !important;
+    }
+    
+    .payment-section p[style*="font-size: 16px"] {
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .payment-section div[style*="margin-bottom: 25px"] span {
+        font-size: 13px !important;
+    }
+    
+    .payment-section div[style*="gap: 15px"][style*="flex-wrap"] {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+        max-width: 260px !important;
+    }
+    
+    .payment-section div[style*="padding: 20px 15px"] {
+        padding: 10px 6px !important;
+        min-width: auto !important;
+    }
+    
+    .payment-section span[style*="48px"] {
+        font-size: 24px !important;
+    }
+    
+    .payment-section span[style*="13px"] {
+        font-size: 10px !important;
+    }
+    
+    .payment-section div[style*="400px"] {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 0 10px !important;
+        box-sizing: border-box !important;
+    }
+    
+    .payment-section div[style*="linear-gradient"] {
+        padding: 20px 15px !important;
+    }
+    
+    .payment-section div[style*="36px"][style*="800"] {
+        font-size: 24px !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .payment-section input#customerEmail {
+        padding: 12px 14px !important;
+        font-size: 13px !important;
+    }
+    
+    .payment-section button#payButton {
+        padding: 14px !important;
+        font-size: 14px !important;
+    }
+    
+    .payment-section div[style*="12px"][style*="1.6"] {
+        font-size: 10px !important;
+        line-height: 1.4 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .payment-section {
+        padding: 30px 0 !important;
+    }
+    
+    .payment-section h2[style*="42px"] {
+        font-size: 22px !important;
+    }
+    
+    .payment-section div[style*="400px"] {
+        padding: 0 5px !important;
+    }
+    
+    .payment-section div[style*="linear-gradient"] {
+        padding: 18px 12px !important;
+    }
+    
+    .payment-section div[style*="36px"][style*="800"] {
+        font-size: 20px !important;
+    }
+}
            </style>
 </head>
 <body>
@@ -2222,7 +2320,7 @@
                         </div>
                         <div class="hero-image-box">
                             <img src="butterflies.gif" alt="Бабочки" class="butterflies-gif">
-                            <img src="Shiba9.png" alt="Полина" class="main-img">
+                            <img src="Shiba9.png" alt="Полина Гин" class="main-img">
                         </div>
                     </div>
 
@@ -2282,6 +2380,98 @@
                 </div>
             </div>
         </section>
+
+<!-- ==========================================================================
+РАЗДЕЛ: ОПЛАТА ПОТОКА С ... (ДВУХКОЛОНОЧНЫЙ + Т-БАНК)
+========================================================================== -->
+<section class="payment-section" style="padding: 80px 0; background: transparent !important; font-family: 'Poppins', sans-serif;">
+    <div style="width: 100%; max-width: 1140px; margin: 0 auto; padding: 0 20px; box-sizing: border-box;">
+        <!-- ДВУХКОЛОНОЧНЫЙ КОНТЕЙНЕР -->
+        <div style="display: flex !important; gap: 40px !important; align-items: flex-start !important; flex-wrap: wrap !important; width: 100% !important;">
+            <!-- ЛЕВАЯ КОЛОНКА: Текст + таймер -->
+            <div style="flex: 1 !important; min-width: 320px !important;">
+                <!-- Логотипы платежных систем -->
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px; flex-wrap: wrap;">
+                    <span style="font-size: 18px; font-weight: 800; color: #1A2356;">Т-БАНК</span>
+                    <span style="font-size: 24px;">🔴</span>
+                    <span style="font-size: 24px;">🔵</span>
+                    <span style="font-size: 18px; font-weight: 700; color: #1A2356;">VISA</span>
+                    <span style="font-size: 18px; font-weight: 700; color: #10B981;">МИР</span>
+                </div>
+                <!-- Заголовок -->
+                <h2 style="font-size: 42px; font-weight: 800; color: #1A2356; margin: 0 0 20px 0; line-height: 1.2; letter-spacing: -1px;">
+                    Набор на 5 поток с ... открыт
+                </h2>
+                <!-- Описание -->
+                <p style="font-size: 16px; line-height: 1.7; color: #5E6282; margin-bottom: 20px;">
+                    Успей забрать 1 из 20 мест и открой для себя удивительный мир японского. Можно платить Долями или сразу всю сумму.
+                </p>
+                <p style="font-size: 16px; line-height: 1.7; color: #5E6282; margin-bottom: 40px;">
+                    После оплаты направим тебе письмо с порядком действий на почту.
+                </p>
+                <!-- Таймер -->
+                <div style="font-size: 16px; color: #5E6282; margin-bottom: 15px;">До окончания набора:</div>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <div style="background: #ffffff; padding: 20px 15px; border-radius: 16px; text-align: center; min-width: 80px; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                        <span id="pay-days" style="font-size: 48px; font-weight: 900; color: #1A2356; line-height: 1; display: block;">00</span>
+                        <span style="font-size: 13px; color: #888; margin-top: 5px; display: block;">дней</span>
+                    </div>
+                    <div style="background: #ffffff; padding: 20px 15px; border-radius: 16px; text-align: center; min-width: 80px; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                        <span id="pay-hours" style="font-size: 48px; font-weight: 900; color: #1A2356; line-height: 1; display: block;">00</span>
+                        <span style="font-size: 13px; color: #888; margin-top: 5px; display: block;">часов</span>
+                    </div>
+                    <div style="background: #ffffff; padding: 20px 15px; border-radius: 16px; text-align: center; min-width: 80px; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                        <span id="pay-minutes" style="font-size: 48px; font-weight: 900; color: #1A2356; line-height: 1; display: block;">00</span>
+                        <span style="font-size: 13px; color: #888; margin-top: 5px; display: block;">минут</span>
+                    </div>
+                    <div style="background: #ffffff; padding: 20px 15px; border-radius: 16px; text-align: center; min-width: 80px; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                        <span id="pay-seconds" style="font-size: 48px; font-weight: 900; color: #1A2356; line-height: 1; display: block;">00</span>
+                        <span style="font-size: 13px; color: #888; margin-top: 5px; display: block;">секунд</span>
+                    </div>
+                </div>
+            </div>
+            <!-- ПРАВАЯ КОЛОНКА: Оранжевая форма оплаты -->
+            <div style="flex: 0 0 400px !important; max-width: 400px !important;">
+                <div style="background: linear-gradient(135deg, #FF9A58 0%, #FFD200 100%); border-radius: 24px; padding: 35px; box-shadow: 0 20px 60px rgba(255, 154, 88, 0.3); color: white;">
+                    <div style="font-size: 14px; font-weight: 500; opacity: 0.9; margin-bottom: 10px;">Купить место в потоке</div>
+                    <div style="font-size: 36px; font-weight: 800; margin-bottom: 30px;">6 600 ₽</div>
+                    <form id="paymentForm" onsubmit="initiatePayment(event)">
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; font-size: 14px; font-weight: 500; margin-bottom: 10px; opacity: 0.95;">Напиши e-mail *</label>
+                            <input
+                                type="email"
+                                id="customerEmail"
+                                placeholder="example@mail.com"
+                                required
+                                style="width: 100%; padding: 16px 20px; border: 2px solid rgba(255,255,255,0.3); border-radius: 12px; background: rgba(255,255,255,0.15); color: white; font-size: 16px; font-family: 'Poppins', sans-serif; transition: all 0.3s ease; box-sizing: border-box;"
+                            >
+                        </div>
+                        <button
+                            type="submit"
+                            id="payButton"
+                            style="width: 100%; padding: 18px; background: white; color: #FF9A58; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; margin-bottom: 20px; font-family: 'Poppins', sans-serif;"
+                            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.15)';"
+                            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';"
+                        >
+                            Оплатить
+                        </button>
+                    </form>
+                    <!-- Текст согласия -->
+                    <div style="font-size: 12px; line-height: 1.6; opacity: 0.85; padding-left: 15px; border-left: 3px solid rgba(255,255,255,0.4);">
+                        Нажимая на кнопку, вы даете согласие на обработку своих персональных данных и соглашаетесь с
+                        <a href="../Политика/privacy.html" target="_blank" style="color: white; text-decoration: underline;">политикой конфиденциальности</a>,
+                        <a href="../Оферта/offer.html" target="_blank" style="color: white; text-decoration: underline;">публичной офертой</a>,
+                        <a href="../Правила/rules.html" target="_blank" style="color: white; text-decoration: underline;">правилами использования</a> и
+                        <a href="../Соглашение/agreement.html" target="_blank" style="color: white; text-decoration: underline;">пользовательским соглашением</a>.
+                    </div>
+                    <!-- КОНТЕЙНЕР ДЛЯ IFRAME ОПЛАТЫ Т-БАНКА -->
+                    <div id="paymentContainer" style="display: none; margin-top: 25px; border-radius: 16px; overflow: hidden; min-height: 400px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
         <!-- ==========================================================================
              5. КРЕАТИВНЫЙ БЛОК: КУЛЬТУРНЫЕ ОТЗЫВЫ
@@ -3033,6 +3223,361 @@ window.replainSettings = { id: '77b3e2cb-c3e1-458a-a12d-c1dc20c0bd76' };
 (function(u){var s=document.createElement('script');s.async=true;s.src=u;
 var x=document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);
 })('https://widget.replain.cc/dist/client.js');
+</script>
+<!-- ==========================================================================
+     ИНТЕГРАЦИЯ ОПЛАТЫ Т-БАНК (ШАГ 1: Подключение скрипта)
+     ========================================================================== -->
+<script src="https://integrationjs.t-static.ru/integration.js" onload="onPaymentIntegrationLoad()" async></script>
+
+<script>
+  // КОНФИГУРАЦИЯ Т-БАНКА
+  const initConfig = {
+    // ВСТАВЬ СЮДА СВОЙ TerminalKey из личного кабинета Т-Банка (например, '1234567890DEMO')
+    terminalKey: '1748129314292DEMO', 
+    product: 'eacq',
+    features: {
+      payment: {},      // Модуль кнопок оплаты
+      iframe: {},       // Модуль для открытия формы оплаты в iframe (то, что нам нужно)
+      addcard: {
+        iframe: {},     // Модуль привязки карты
+      },
+      preinit: {
+        iframe: {}      // Модуль предплатежной формы
+      }
+    }
+  };
+
+  // Функция инициализации, которая вызовется автоматически после загрузки скрипта
+  function onPaymentIntegrationLoad() {
+    PaymentIntegration.init(initConfig)
+      .then(() => {
+        console.log('✅ Виджет Т-Банка успешно инициализирован');
+      })
+      .catch((error) => {
+        console.error('❌ Ошибка инициализации виджета Т-Банка:', error);
+      });
+  }
+</script>
+<script>
+// ==========================================================================
+// СЕНЬОРСКИЙ АДАПТИВ БЛОКА ОПЛАТЫ (JavaScript-подход)
+// ==========================================================================
+(function() {
+    'use strict';
+    
+    function applyMobilePaymentStyles() {
+        const isMobile = window.innerWidth <= 768;
+        const isSmallMobile = window.innerWidth <= 480;
+        
+        const paymentSection = document.querySelector('.payment-section');
+        if (!paymentSection) return;
+        
+        const flexContainer = paymentSection.querySelector('div[style*="display: flex"]');
+        if (!flexContainer) return;
+        
+        const columns = flexContainer.children;
+        const leftColumn = columns[0];
+        const rightColumn = columns[1];
+        
+        if (isMobile) {
+            // === ЛЕВАЯ КОЛОНКА ===
+            if (leftColumn) {
+                leftColumn.style.flex = '1 1 100%';
+                leftColumn.style.minWidth = '100%';
+                
+                const h2 = leftColumn.querySelector('h2');
+                if (h2) h2.style.fontSize = isSmallMobile ? '22px' : '26px';
+                
+                const paragraphs = leftColumn.querySelectorAll('p');
+                paragraphs.forEach(p => {
+                    p.style.fontSize = isSmallMobile ? '13px' : '14px';
+                    p.style.marginBottom = '12px';
+                });
+                
+                const logosDiv = leftColumn.querySelector('div[style*="margin-bottom: 25px"]');
+                if (logosDiv) {
+                    const spans = logosDiv.querySelectorAll('span');
+                    spans.forEach(span => span.style.fontSize = '13px');
+                }
+                
+                const timerContainer = leftColumn.querySelector('div[style*="display: flex"][style*="gap: 15px"]');
+                if (timerContainer) {
+                    timerContainer.style.display = 'grid';
+                    timerContainer.style.gridTemplateColumns = 'repeat(2, 1fr)';
+                    timerContainer.style.gap = '8px';
+                    timerContainer.style.maxWidth = '260px';
+                    timerContainer.style.flexWrap = 'nowrap';
+                    
+                    const timerBlocks = timerContainer.querySelectorAll('div[style*="background: #ffffff"]');
+                    timerBlocks.forEach(block => {
+                        block.style.padding = '10px 6px';
+                        block.style.minWidth = 'auto';
+                        
+                        const numSpan = block.querySelector('span[style*="font-size: 48px"]');
+                        if (numSpan) numSpan.style.fontSize = isSmallMobile ? '24px' : '28px';
+                        
+                        const labelSpan = block.querySelector('span[style*="font-size: 13px"]');
+                        if (labelSpan) labelSpan.style.fontSize = '10px';
+                    });
+                }
+            }
+            
+            // === ПРАВАЯ КОЛОНКА (ОРАНЖЕВАЯ ФОРМА) ===
+            if (rightColumn) {
+                rightColumn.style.flex = '1 1 100%';
+                rightColumn.style.maxWidth = '100%';
+                rightColumn.style.width = '100%';
+                rightColumn.style.padding = isSmallMobile ? '0 5px' : '0 10px';
+                rightColumn.style.boxSizing = 'border-box';
+                
+                const orangeCard = rightColumn.querySelector('div[style*="background: linear-gradient"]');
+                if (orangeCard) {
+                    orangeCard.style.padding = isSmallMobile ? '18px 12px' : '20px 15px';
+                    
+                    const priceDiv = orangeCard.querySelector('div[style*="font-size: 36px"]');
+                    if (priceDiv) {
+                        priceDiv.style.fontSize = isSmallMobile ? '20px' : '22px';
+                        priceDiv.style.marginBottom = '15px';
+                    }
+                    
+                    const emailInput = orangeCard.querySelector('#customerEmail');
+                    if (emailInput) {
+                        emailInput.style.padding = '12px 14px';
+                        emailInput.style.fontSize = '13px';
+                    }
+                    
+                    const payButton = orangeCard.querySelector('#payButton');
+                    if (payButton) {
+                        payButton.style.padding = '14px';
+                        payButton.style.fontSize = '14px';
+                    }
+                    
+                    const agreementDiv = orangeCard.querySelector('div[style*="font-size: 12px"]');
+                    if (agreementDiv) {
+                        agreementDiv.style.fontSize = '10px';
+                        agreementDiv.style.lineHeight = '1.4';
+                    }
+                }
+            }
+            
+            paymentSection.style.padding = isSmallMobile ? '20px 0' : '30px 0';
+            
+        } else {
+            // === ДЕСКТОП: Возвращаем оригинальные стили ===
+            if (leftColumn) {
+                leftColumn.style.flex = '1';
+                leftColumn.style.minWidth = '320px';
+                
+                const h2 = leftColumn.querySelector('h2');
+                if (h2) h2.style.fontSize = '42px';
+                
+                const paragraphs = leftColumn.querySelectorAll('p');
+                paragraphs.forEach(p => {
+                    p.style.fontSize = '16px';
+                    p.style.marginBottom = '';
+                });
+                
+                const timerContainer = leftColumn.querySelector('div[style*="display: flex"][style*="gap: 15px"]');
+                if (timerContainer) {
+                    timerContainer.style.display = 'flex';
+                    timerContainer.style.gridTemplateColumns = '';
+                    timerContainer.style.gap = '15px';
+                    timerContainer.style.maxWidth = '';
+                    timerContainer.style.flexWrap = 'wrap';
+                    
+                    const timerBlocks = timerContainer.querySelectorAll('div[style*="background: #ffffff"]');
+                    timerBlocks.forEach(block => {
+                        block.style.padding = '20px 15px';
+                        block.style.minWidth = '80px';
+                        
+                        const numSpan = block.querySelector('span[style*="font-size: 48px"]');
+                        if (numSpan) numSpan.style.fontSize = '48px';
+                        
+                        const labelSpan = block.querySelector('span[style*="font-size: 13px"]');
+                        if (labelSpan) labelSpan.style.fontSize = '13px';
+                    });
+                }
+            }
+            
+            if (rightColumn) {
+                rightColumn.style.flex = '0 0 400px';
+                rightColumn.style.maxWidth = '400px';
+                rightColumn.style.width = '';
+                rightColumn.style.padding = '';
+                rightColumn.style.boxSizing = '';
+                
+                const orangeCard = rightColumn.querySelector('div[style*="background: linear-gradient"]');
+                if (orangeCard) {
+                    orangeCard.style.padding = '35px';
+                    
+                    const priceDiv = orangeCard.querySelector('div[style*="font-size: 36px"]');
+                    if (priceDiv) {
+                        priceDiv.style.fontSize = '36px';
+                        priceDiv.style.marginBottom = '30px';
+                    }
+                    
+                    const emailInput = orangeCard.querySelector('#customerEmail');
+                    if (emailInput) {
+                        emailInput.style.padding = '16px 20px';
+                        emailInput.style.fontSize = '16px';
+                    }
+                    
+                    const payButton = orangeCard.querySelector('#payButton');
+                    if (payButton) {
+                        payButton.style.padding = '18px';
+                        payButton.style.fontSize = '16px';
+                    }
+                    
+                    const agreementDiv = orangeCard.querySelector('div[style*="font-size: 12px"]');
+                    if (agreementDiv) {
+                        agreementDiv.style.fontSize = '12px';
+                        agreementDiv.style.lineHeight = '1.6';
+                    }
+                }
+            }
+            
+            paymentSection.style.padding = '80px 0';
+        }
+    }
+    
+    // Применяем стили при загрузке
+    applyMobilePaymentStyles();
+    
+    // Применяем стили при изменении размера окна
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(applyMobilePaymentStyles, 100);
+    });
+})();
+</script>
+<script>
+// ==========================================================================
+// ФУНКЦИИ ОПЛАТЫ Т-БАНК
+// ==========================================================================
+
+// Переменная для хранения экземпляра виджета
+let paymentIntegrationInstance = null;
+
+// Инициализация виджета (вызывается автоматически скриптом Т-Банка)
+function onPaymentIntegrationLoad() {
+    PaymentIntegration.init({
+        terminalKey: '1748129314292DEMO', // ⚠️ ТВОЙ TERMINAL KEY
+        product: 'eacq',
+        features: {
+            iframe: {}
+        }
+    }).then(async (integration) => {
+        paymentIntegrationInstance = await integration.iframe.create('payment-iframe', {});
+        console.log('✅ Виджет Т-Банка инициализирован');
+    }).catch((error) => {
+        console.error('❌ Ошибка инициализации:', error);
+    });
+}
+
+// Главная функция оплаты (вызывается при нажатии кнопки "Оплатить")
+async function initiatePayment(event) {
+    event.preventDefault();
+    
+    const email = document.getElementById('customerEmail').value.trim();
+    const payButton = document.getElementById('payButton');
+    
+    if (!email) {
+        alert('Пожалуйста, введите ваш email');
+        return;
+    }
+
+    payButton.disabled = true;
+    payButton.innerText = 'Подготовка оплаты...';
+
+    // ⚠️ НАСТРОЙКИ — МЕНЯЙ НА КАЖДОЙ СТРАНИЦЕ
+    const amount = 660000; // Сумма в копейках (660000 = 6600 руб)
+    const orderId = 'ORDER_JP_' + Date.now();
+    const terminalKey = '1748129314292DEMO'; // Твой Terminal Key
+    const apiPassword = 'GPRcu&$oIe*wltpF'; // ⚠️ Твой пароль из ЛК Т-Банка
+
+    try {
+        const token = await generateToken(terminalKey, amount, orderId, apiPassword);
+
+        const response = await fetch('https://rest-api-test.tbank.ru/v2/Init', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                TerminalKey: terminalKey,
+                Amount: amount,
+                OrderId: orderId,
+                Token: token,
+                Description: 'Оплата потока по японскому', // ⚠️ МЕНЯЙ НА КАЖДОЙ СТРАНИЦЕ
+                Language: 'ru',
+                Data: { Email: email }
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.Success && data.PaymentURL) {
+            const container = document.getElementById('paymentContainer');
+            container.style.display = 'block';
+            document.getElementById('paymentForm').style.display = 'none';
+            await paymentIntegrationInstance.mount(container, data.PaymentURL);
+        } else {
+            throw new Error(data.Message || 'Ошибка инициализации');
+        }
+
+    } catch (error) {
+        console.error('Ошибка оплаты:', error);
+        alert('Произошла ошибка при оплате. Попробуйте еще раз.');
+        payButton.disabled = false;
+        payButton.innerText = 'Оплатить';
+    }
+}
+
+// Генерация SHA-256 токена
+async function generateToken(terminalKey, amount, orderId, password) {
+    const str = amount.toString() + orderId + password + terminalKey;
+    const encoder = new TextEncoder();
+    const data = encoder.encode(str);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+</script>
+<script>
+// ==========================================================================
+// ТАЙМЕР ОБРАТНОГО ОТСЧЁТА БЛОКА ОПЛАТЫ
+// ==========================================================================
+document.addEventListener("DOMContentLoaded", function() {
+    // ⚠️ УСТАНОВИ СВОЮ ДАТУ ОКОНЧАНИЯ НАБОРА
+    // Формат: new Date(год, месяц-1, день, часы, минуты, секунды)
+    // Пример: 27 сентября 2026 = new Date(2026, 8, 27, 23, 59, 59)
+    const paymentEndDate = new Date(2026, 10, 28, 23, 59, 59);
+    
+    function updatePaymentTimer() {
+        const now = new Date().getTime();
+        const distance = paymentEndDate - now;
+        
+        if (distance < 0) {
+            document.getElementById("pay-days").innerText = "00";
+            document.getElementById("pay-hours").innerText = "00";
+            document.getElementById("pay-minutes").innerText = "00";
+            document.getElementById("pay-seconds").innerText = "00";
+            return;
+        }
+        
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        document.getElementById("pay-days").innerText = String(days).padStart(2, '0');
+        document.getElementById("pay-hours").innerText = String(hours).padStart(2, '0');
+        document.getElementById("pay-minutes").innerText = String(minutes).padStart(2, '0');
+        document.getElementById("pay-seconds").innerText = String(seconds).padStart(2, '0');
+    }
+    
+    updatePaymentTimer();
+    setInterval(updatePaymentTimer, 1000);
+});
 </script>
 </body>
 </html>
