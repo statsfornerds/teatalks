@@ -3749,40 +3749,6 @@ window.submitWaitlistForm = function(event) {
     });
 };
 </script>
-<!-- ==========================================================================
-     ИНТЕГРАЦИЯ ОПЛАТЫ Т-БАНК (ШАГ 1: Подключение скрипта)
-     ========================================================================== -->
-<script src="https://integrationjs.t-static.ru/integration.js" onload="onPaymentIntegrationLoad()" async></script>
-
-<script>
-  // КОНФИГУРАЦИЯ Т-БАНКА
-  const initConfig = {
-    // ВСТАВЬ СЮДА СВОЙ TerminalKey из личного кабинета Т-Банка (например, '1234567890DEMO')
-    terminalKey: '1748129314292DEMO', 
-    product: 'eacq',
-    features: {
-      payment: {},      // Модуль кнопок оплаты
-      iframe: {},       // Модуль для открытия формы оплаты в iframe (то, что нам нужно)
-      addcard: {
-        iframe: {},     // Модуль привязки карты
-      },
-      preinit: {
-        iframe: {}      // Модуль предплатежной формы
-      }
-    }
-  };
-
-  // Функция инициализации, которая вызовется автоматически после загрузки скрипта
-  function onPaymentIntegrationLoad() {
-    PaymentIntegration.init(initConfig)
-      .then(() => {
-        console.log('✅ Виджет Т-Банка успешно инициализирован');
-      })
-      .catch((error) => {
-        console.error('❌ Ошибка инициализации виджета Т-Банка:', error);
-      });
-  }
-</script>
 <script>
 // ==========================================================================
 // СЕНЬОРСКИЙ АДАПТИВ БЛОКА ОПЛАТЫ (JavaScript-подход)
@@ -3976,6 +3942,7 @@ window.submitWaitlistForm = function(event) {
     });
 })();
 </script>
+<script src="https://integrationjs.t-static.ru/integration.js" onload="onPaymentIntegrationLoad()" async></script>
 <script>
 // ==========================================================================
 // ФУНКЦИИ ОПЛАТЫ Т-БАНК
@@ -3999,7 +3966,7 @@ function onPaymentIntegrationLoad() {
         console.error('❌ Ошибка инициализации:', error);
     });
 }
-// ==========================================================================
+/ ==========================================================================
 // ФУНКЦИЯ ОТПРАВКИ ЗАЯВКИ И ОТКРЫТИЯ ОПЛАТЫ (ЧЕРЕЗ GOOGLE APPS SCRIPT)
 // ==========================================================================
 async function initiatePayment(event) {
@@ -4016,30 +3983,34 @@ async function initiatePayment(event) {
     payButton.disabled = true;
     payButton.innerText = 'Подготовка оплаты...';
 
-    // ⚠️ ВСТАВЬ СЮДА СКОПИРОВАННЫЙ URL ИЗ GOOGLE APPS SCRIPT
-    const GAS_URL = 'https://script.google.com/macros/s/AKfycbxR9D7C_cYjbEAlVjeVBA_WPKPCH4gbgVkWedsI3lDvqCL6TlyEhAhNGzoZLjBLx5Gp/exec'; 
+    // ⚠️ ВСТАВЬ СЮДА СВОЙ URL ИЗ GOOGLE APPS SCRIPT (после развёртывания)
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbxR9D7C_cYjbEAlVjeVBA_WPKPCH4gbgVkWedsI3lDvqCL6TlyEhAhNGzoZLjBLx5Gp/exec';
 
     try {
+        // Отправляем запрос в Google Apps Script (он сам сделает токен и запрос к Т-Банку)
         const response = await fetch(GAS_URL, {
             method: 'POST',
             body: JSON.stringify({
                 action: 'initPayment',
                 amount: 660000,
-                orderId: 'ORDER_TEST_' + Date.now(),
+                orderId: 'ORDER_CN_' + Date.now(),
                 email: email,
                 description: 'Оплата 5 потока с Таней (китайский)'
             })
         });
 
         const data = await response.json();
+        console.log('Ответ от Google Apps Script:', data);
 
         if (data.status === 'success' && data.paymentUrl) {
             console.log('✅ Получен URL оплаты:', data.paymentUrl);
             
             const container = document.getElementById('paymentContainer');
             container.style.display = 'block';
+            container.innerHTML = ''; // Очищаем предыдущее содержимое
             document.getElementById('paymentForm').style.display = 'none';
             
+            // Монтируем iframe Т-Банка
             await paymentIntegrationInstance.mount(container, data.paymentUrl);
             
         } else {
