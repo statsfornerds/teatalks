@@ -3474,8 +3474,9 @@ function onPaymentIntegrationLoad() {
         console.error('❌ Ошибка инициализации:', error);
     });
 }
-
-// Главная функция оплаты (вызывается при нажатии кнопки "Оплатить")
+// ==========================================================================
+// ФУНКЦИЯ ОТПРАВКИ ЗАЯВКИ И ОТКРЫТИЯ ОПЛАТЫ (ЧЕРЕЗ GOOGLE APPS SCRIPT)
+// ==========================================================================
 async function initiatePayment(event) {
     event.preventDefault();
     
@@ -3490,56 +3491,42 @@ async function initiatePayment(event) {
     payButton.disabled = true;
     payButton.innerText = 'Подготовка оплаты...';
 
-    // ⚠️ НАСТРОЙКИ — МЕНЯЙ НА КАЖДОЙ СТРАНИЦЕ
-    const amount = 660000; // Сумма в копейках (660000 = 6600 руб)
-    const orderId = 'ORDER_JP_' + Date.now();
-    const terminalKey = '1748129314292DEMO'; // Твой Terminal Key
-    const apiPassword = 'GPRcu&$oIe*wltpF'; // ⚠️ Твой пароль из ЛК Т-Банка
+    // ⚠️ ВСТАВЬ СЮДА СКОПИРОВАННЫЙ URL ИЗ GOOGLE APPS SCRIPT
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbxR9D7C_cYjbEAlVjeVBA_WPKPCH4gbgVkWedsI3lDvqCL6TlyEhAhNGzoZLjBLx5Gp/exec'; 
 
     try {
-        const token = await generateToken(terminalKey, amount, orderId, apiPassword);
-
-        const response = await fetch('https://script.google.com/macros/s/AKfycbyyZkZsH1NIbIru8a77P0jF2NyfLkj40G8Axx6jU8NE0u5vs2cCzfR57uWqpDI96y8p/exec', {
+        const response = await fetch(GAS_URL, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                TerminalKey: terminalKey,
-                Amount: amount,
-                OrderId: orderId,
-                Token: token,
-                Description: 'Оплата потока по японскому', // ⚠️ МЕНЯЙ НА КАЖДОЙ СТРАНИЦЕ
-                Language: 'ru',
-                Data: { Email: email }
+                action: 'initPayment',
+                amount: 660000,
+                orderId: 'ORDER_TEST_' + Date.now(),
+                email: email,
+                description: 'Оплата 5 потока с Таней (китайский)'
             })
         });
 
         const data = await response.json();
 
-        if (data.Success && data.PaymentURL) {
+        if (data.status === 'success' && data.paymentUrl) {
+            console.log('✅ Получен URL оплаты:', data.paymentUrl);
+            
             const container = document.getElementById('paymentContainer');
             container.style.display = 'block';
             document.getElementById('paymentForm').style.display = 'none';
-            await paymentIntegrationInstance.mount(container, data.PaymentURL);
+            
+            await paymentIntegrationInstance.mount(container, data.paymentUrl);
+            
         } else {
-            throw new Error(data.Message || 'Ошибка инициализации');
+            throw new Error(data.message || 'Ошибка инициализации платежа');
         }
 
     } catch (error) {
-        console.error('Ошибка оплаты:', error);
-        alert('Произошла ошибка при оплате. Попробуйте еще раз.');
+        console.error('❌ Ошибка оплаты:', error);
+        alert('Произошла ошибка при подготовке оплаты. Попробуйте еще раз.');
         payButton.disabled = false;
         payButton.innerText = 'Оплатить';
     }
-}
-
-// Генерация SHA-256 токена
-async function generateToken(terminalKey, amount, orderId, password) {
-    const str = amount.toString() + orderId + password + terminalKey;
-    const encoder = new TextEncoder();
-    const data = encoder.encode(str);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 </script>
 <script>
