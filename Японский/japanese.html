@@ -2464,8 +2464,6 @@
                         <a href="../Правила/rules.html" target="_blank" style="color: white; text-decoration: underline;">правилами использования</a> и
                         <a href="../Соглашение/agreement.html" target="_blank" style="color: white; text-decoration: underline;">пользовательским соглашением</a>.
                     </div>
-                    <!-- КОНТЕЙНЕР ДЛЯ IFRAME ОПЛАТЫ Т-БАНКА -->
-                    <div id="paymentContainer" style="display: none; margin-top: 25px; border-radius: 16px; overflow: hidden; min-height: 400px;"></div>
                 </div>
             </div>
         </div>
@@ -3417,89 +3415,6 @@ var x=document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);
     });
 })();
 </script>
-<script src="https://integrationjs.t-static.ru/integration.js" onload="onPaymentIntegrationLoad()" async></script>
-<script>
-// ==========================================================================
-// ФУНКЦИИ ОПЛАТЫ Т-БАНК
-// ==========================================================================
-
-// Переменная для хранения экземпляра виджета
-let paymentIntegrationInstance = null;
-
-// Инициализация виджета (вызывается автоматически скриптом Т-Банка)
-function onPaymentIntegrationLoad() {
-    PaymentIntegration.init({
-        terminalKey: '1748129314292DEMO', // ⚠️ ТВОЙ TERMINAL KEY
-        product: 'eacq',
-        features: {
-            iframe: {}
-        }
-    }).then(async (integration) => {
-        paymentIntegrationInstance = await integration.iframe.create('payment-iframe', {});
-        console.log('✅ Виджет Т-Банка инициализирован');
-    }).catch((error) => {
-        console.error('❌ Ошибка инициализации:', error);
-    });
-}
-/ ==========================================================================
-// ФУНКЦИЯ ОТПРАВКИ ЗАЯВКИ И ОТКРЫТИЯ ОПЛАТЫ (ЧЕРЕЗ GOOGLE APPS SCRIPT)
-// ==========================================================================
-async function initiatePayment(event) {
-    event.preventDefault();
-    
-    const email = document.getElementById('customerEmail').value.trim();
-    const payButton = document.getElementById('payButton');
-    
-    if (!email) {
-        alert('Пожалуйста, введите ваш email');
-        return;
-    }
-
-    payButton.disabled = true;
-    payButton.innerText = 'Подготовка оплаты...';
-
-    // ⚠️ ВСТАВЬ СЮДА СВОЙ URL ИЗ GOOGLE APPS SCRIPT (после развёртывания)
-    const GAS_URL = 'https://script.google.com/macros/s/AKfycbxR9D7C_cYjbEAlVjeVBA_WPKPCH4gbgVkWedsI3lDvqCL6TlyEhAhNGzoZLjBLx5Gp/exec';
-
-    try {
-        // Отправляем запрос в Google Apps Script (он сам сделает токен и запрос к Т-Банку)
-        const response = await fetch(GAS_URL, {
-            method: 'POST',
-            body: JSON.stringify({
-                action: 'initPayment',
-                amount: 660000,
-                orderId: 'ORDER_CN_' + Date.now(),
-                email: email,
-                description: 'Оплата 5 потока с Таней (китайский)'
-            })
-        });
-
-        const data = await response.json();
-        console.log('Ответ от Google Apps Script:', data);
-
-        if (data.status === 'success' && data.paymentUrl) {
-            console.log('✅ Получен URL оплаты:', data.paymentUrl);
-            
-            const container = document.getElementById('paymentContainer');
-            container.style.display = 'block';
-            container.innerHTML = ''; // Очищаем предыдущее содержимое
-            document.getElementById('paymentForm').style.display = 'none';
-            
-            // Монтируем iframe Т-Банка
-            await paymentIntegrationInstance.mount(container, data.paymentUrl);
-            
-        } else {
-            throw new Error(data.message || 'Ошибка инициализации платежа');
-        }
-
-    } catch (error) {
-        console.error('❌ Ошибка оплаты:', error);
-        alert('Произошла ошибка при подготовке оплаты. Попробуйте еще раз.');
-        payButton.disabled = false;
-        payButton.innerText = 'Оплатить';
-    }
-}
-</script>
 <script>
 // ==========================================================================
 // ТАЙМЕР ОБРАТНОГО ОТСЧЁТА БЛОКА ОПЛАТЫ
@@ -3536,6 +3451,65 @@ document.addEventListener("DOMContentLoaded", function() {
     updatePaymentTimer();
     setInterval(updatePaymentTimer, 1000);
 });
+</script>
+<script>
+// ==========================================================================
+// УПРОЩЁННАЯ ОПЛАТА: EMAIL В ТАБЛИЦУ + ПЕРЕХОД ПО СТАТИЧНОЙ ССЫЛКЕ
+// ==========================================================================
+async function initiatePayment(event) {
+    event.preventDefault();
+    
+    const email = document.getElementById('customerEmail').value.trim();
+    const payButton = document.getElementById('payButton');
+    
+    if (!email) {
+        alert('Пожалуйста, введите ваш email');
+        return;
+    }
+
+    payButton.disabled = true;
+    payButton.innerText = 'Отправляем...';
+
+    // ⚠️ ВСТАВЬ СЮДА СВОЙ URL GOOGLE APPS SCRIPT
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbw4th92E8n3TrCJ5FNFNi4KzlvYDM48vvJBX3BLlENqBNA87cOFwydor3CWZTKs8UZDXQ/exec";
+
+    // ⚠️ ВСТАВЬ СЮДА СВОЮ СТАТИЧНУЮ ССЫЛКУ НА ОПЛАТУ ИЗ ЛК Т-БАНКА
+    const TBANK_LINK = "https://paylink.tbank.ru/3fe3c7b9-02e0-40b5-829c-f34234f58cdb";
+
+    try {
+        // 1. Отправляем email в Google Таблицу (на лист "Платежи")
+        await fetch(GAS_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                action: 'payment',
+                type: 'payment',
+                email: email,
+                amount: 660000,
+                description: 'Оплата потока (японский)',
+                page: 'japanese.html'
+            })
+        });
+
+        // 2. Открываем статичную ссылку оплаты Т-Банка в новой вкладке
+        window.open(TBANK_LINK, '_blank');
+
+        // 3. Сообщение пользователю
+        alert('🧡 Cool! Страница оплаты открыта в новой вкладке.\n\nПосле оплаты проверь почту — в течение дня пришлём письмо с инструкциями.');
+        
+        // 4. Возвращаем кнопку и очищаем поле
+        payButton.disabled = false;
+        payButton.innerText = 'Оплатить';
+        document.getElementById('customerEmail').value = '';
+
+    } catch (error) {
+        console.error('Ошибка:', error);
+        alert('Произошла ошибка. Попробуй ещё раз или напиши нам в Telegram.');
+        payButton.disabled = false;
+        payButton.innerText = 'Оплатить';
+    }
+}
 </script>
 </body>
 </html>
