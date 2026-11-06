@@ -742,15 +742,17 @@
             }
 
             .butterflies-gif,
-            img[alt="Китайский декор"],
-            img[src="butterflies.gif"],
-            img[src="lanterns.gif"] {
-                display: none !important;
-                visibility: hidden !important;
-                opacity: 0 !important;
-                width: 0 !important;
-                height: 0 !important;
-            }
+    img[alt="Китайский декор"],
+    img[src="butterflies.gif"],
+    img[src="lanterns.gif"],
+    img[src="magic.gif"],
+    .magic-pointer-zone { /* <-- ДОБАВЛЯЕМ ЭТОТ КЛАСС */
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
 
             .slide-item {
                 flex-direction: column-reverse !important;
