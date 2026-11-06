@@ -12,6 +12,7 @@
     <link href="https://googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap&subset=cyrillic,cyrillic-ext" rel="stylesheet">
     
     <style>
+.payment-section { display: none !important; }
         /* Базовые сбросы стилей */
         * {
             box-sizing: border-box;
@@ -2156,12 +2157,12 @@
 
                         <!-- КОНТЕНТ СЛАЙДА (ТЕКСТ И КНОПКА) -->
                         <div class="hero-content">
-                            <span class="badge">третий поток</span>
+                            <span class="badge">третий поток в 2027</span>
                             <h1 class="hero-title">
                                 <span>Английский</span><br>по фану и с пользой
                             </h1>
                             <p class="hero-description">
-                                24 часа праймового английского. Полная противоположность тому, что тебе преподавали в школе и вузе. С амбициозными ребятами, online-активностями и опытным ведущим Рустамом Пашаевым ты сможешь саморазвиваться. Не через зубрежку, через развлечение, общение и страсть.
+                                24 часа праймового английского. Не через зубрежку, через развлечение, общение и страсть. Это противоположность тому, что тебе преподавали в школе и вузе. С амбициозными ребятами, online-активностями и опытным ведущим Рустамом Пашаевым. Бронируй место через лист ожидания:
                             </p>
                             <div class="cta-buttons">
 <button class="btn-primary" onclick="openWaitlistModal('Рустам Пашаев', 'host-4.jpg', 'Английский')">Записаться</button>
@@ -2515,11 +2516,10 @@ document.addEventListener("DOMContentLoaded", () => {
             <div style="flex: 1 !important; min-width: 320px !important;">
                 <!-- Логотипы платежных систем -->
                 <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px; flex-wrap: wrap;">
-                    <span style="font-size: 18px; font-weight: 800; color: #1A2356;">Т-БАНК</span>
-                    <span style="font-size: 24px;">🔴</span>
-                    <span style="font-size: 24px;">🔵</span>
-                    <span style="font-size: 18px; font-weight: 700; color: #1A2356;">VISA</span>
-                    <span style="font-size: 18px; font-weight: 700; color: #10B981;">МИР</span>
+                    <img src="tbank.svg" alt="T-Bank" style="height: 28px; width: auto; display: block; object-fit: contain;">
+                    <img src="mastercard.svg" alt="Mastercard" style="height: 28px; width: auto; display: block; object-fit: contain;">
+                    <img src="visa.svg" alt="Visa" style="height: 16px; width: auto; display: block; object-fit: contain;">
+                    <img src="mir.svg" alt="Мир" style="height: 20px; width: auto; display: block; object-fit: contain;">
                 </div>
                 <!-- Заголовок -->
                 <h2 style="font-size: 42px; font-weight: 800; color: #1A2356; margin: 0 0 20px 0; line-height: 1.2; letter-spacing: -1px;">
@@ -3340,7 +3340,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const englishStartDate = new Date(2026, 8, 27, 12, 0, 0); 
+    const englishStartDate = new Date(2027, 1, 27, 12, 0, 0); 
 
     const bigNum = document.getElementById("cups-big-num");
     const exactTimer = document.getElementById("eng-exact-timer");
@@ -3948,7 +3948,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // ⚠️ УСТАНОВИ СВОЮ ДАТУ ОКОНЧАНИЯ НАБОРА
     // Формат: new Date(год, месяц-1, день, часы, минуты, секунды)
     // Пример: 27 сентября 2026 = new Date(2026, 8, 27, 23, 59, 59)
-    const paymentEndDate = new Date(2026, 10, 27, 23, 59, 59);
+    const paymentEndDate = new Date(2027, 1, 27, 23, 59, 59);
     
     function updatePaymentTimer() {
         const now = new Date().getTime();

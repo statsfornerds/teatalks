@@ -12,6 +12,7 @@
     <link href="https://googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap&subset=cyrillic,cyrillic-ext" rel="stylesheet">
     
     <style>
+.payment-section { display: none !important; }
         /* Базовые сбросы стилей */
         * {
             box-sizing: border-box;
@@ -2392,11 +2393,10 @@
             <div style="flex: 1 !important; min-width: 320px !important;">
                 <!-- Логотипы платежных систем -->
                 <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px; flex-wrap: wrap;">
-                    <span style="font-size: 18px; font-weight: 800; color: #1A2356;">Т-БАНК</span>
-                    <span style="font-size: 24px;">🔴</span>
-                    <span style="font-size: 24px;">🔵</span>
-                    <span style="font-size: 18px; font-weight: 700; color: #1A2356;">VISA</span>
-                    <span style="font-size: 18px; font-weight: 700; color: #10B981;">МИР</span>
+                    <img src="tbank.svg" alt="T-Bank" style="height: 28px; width: auto; display: block; object-fit: contain;">
+                    <img src="mastercard.svg" alt="Mastercard" style="height: 28px; width: auto; display: block; object-fit: contain;">
+                    <img src="visa.svg" alt="Visa" style="height: 16px; width: auto; display: block; object-fit: contain;">
+                    <img src="mir.svg" alt="Мир" style="height: 20px; width: auto; display: block; object-fit: contain;">
                 </div>
                 <!-- Заголовок -->
                 <h2 style="font-size: 42px; font-weight: 800; color: #1A2356; margin: 0 0 20px 0; line-height: 1.2; letter-spacing: -1px;">
@@ -2645,7 +2645,7 @@
                 <div class="promo-glass-card">
                     
                     <div class="promo-left">
-                        <h2 class="promo-title">Получи <span>10%</span> скидку на поток с Полиной</h2>
+                        <h2 class="promo-title">Получи <span>10%</span> скидку на поток</h2>
                         <p class="promo-description">Просто подпишись на наш Tg-канал и напиши в чат на сайте, либо в директ канала.<br>Скидка работает при первой покупке.</p>
                         <a href="https://t.me/teatalkshome" target="_blank" class="promo-btn">Подписаться</a>
                     </div>
@@ -2879,7 +2879,7 @@
 
             // Назначаем целевую дату старта курса — 1 сентября текущего года
             const currentYear = new Date().getFullYear();
-            const startDate = new Date(currentYear, 7, 10); 
+            const startDate = new Date(currentYear, 12, 10); 
             const today = new Date();
 
             const timeDiff = startDate.getTime() - today.getTime();
