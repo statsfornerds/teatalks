@@ -1178,7 +1178,10 @@
         /* АДАПТИВ ПОД МОБИЛКИ */
         @media (max-width: 992px) {
             .promo-section { padding: 30px 0 !important; }
-            .promo-bg-wrapper { border-radius: 24px; width: 100%; }
+            .promo-bg-wrapper { 
+    border-radius: 24px; 
+    width: 90%;
+    margin: 0 20px !important; }
             .promo-glass-card { flex-direction: column !important; padding: 40px 20px !important; gap: 30px !important; text-align: center !important; }
             .promo-left { max-width: 100% !important; flex: none !important; text-align: center !important; }
             .promo-title { font-size: 26px !important; }
@@ -2438,15 +2441,18 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ИСПРАВЛЕНО ДЛЯ МОБИЛОК: Сажаем пирамиду четко на поверхность урезанной тарелки */
     @media (max-width: 768px) {
         .gentleman-table {
-            width: 260px !important;
-            height: 45px !important;
-        }
+        width: 260px !important;
+        height: 45px !important;
+    }
+    #table-cups {
+        /* Центрируем по горизонтали и чуть сильнее уменьшаем масштаб, чтобы влезло на экран телефона */
+        left: 50% !important;
+        transform: translateX(-50%) scale(0.92) !important;
         
-        #table-cups {
-            transform: translateX(-50%) scale(0.76) !important;
-            top: -52px !important; 
-            left: 50% !important;
-        }
+        /* ЖЕСТКАЯ ПРИВЯЗКА К НИЗУ (как на десктопе), чтобы чашки стояли на столе, а не летали */
+        bottom: 2% !important; 
+        top: auto !important; /* Сбрасываем верхний отступ, который всё ломал */
+    }
     }
     /* ВСТАВЛЕНО: Плавное маятниковое покачивание плаката на стене */
     @keyframes poster-swing {
